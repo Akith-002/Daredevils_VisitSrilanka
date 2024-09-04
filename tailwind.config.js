@@ -8,6 +8,8 @@ module.exports = withMT({
         blue: {
           1: "#01385F",
           2: "#3A77BD",
+          3: "#02386E",
+          4: "#000B18",
         },
         green: {
           1: "#1B501B",
@@ -16,6 +18,10 @@ module.exports = withMT({
         sand: {
           DEFAULT: "#F0E3D5",
         },
+      },
+      backgroundImage: {
+        "custom-radial":
+          "radial-gradient(250.23% 63.52% at 63.52% 44.26%, #FFF 0%, #F4F4F4 29.2%, #CECECE 74.4%, #8D8D8D 100%)",
       },
     },
   },
