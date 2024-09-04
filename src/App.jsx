@@ -8,13 +8,9 @@ function App() {
 
   return (
     <>
-      {/* <Router>
-        <VisaApprovalMain />
-      </Router> */}
       <BrowserRouter>
-     
         <Routes>
-          <Route path="/" Component={VisaApprovalMain} />
+          <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
         </Routes>
       </BrowserRouter>
     </>
