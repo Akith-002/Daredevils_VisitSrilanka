@@ -10,9 +10,9 @@ function VisaApprovalMain() {
   return (
     <div className="w-screen h-screen">
       <NavbarType2 />
-      <section className="flex justify-between w-full h-2/3">
+      <section className="flex justify-between w-full h-2/3 mt-20">
         <div className="w-1/3">
-          <p className="text-5xl font-bold">
+          <p className="text-4xl font-bold">
             Start your Sri Lankan adventure with ease—apply for your visa or
             check your approval status in just a few clicks!
           </p>
