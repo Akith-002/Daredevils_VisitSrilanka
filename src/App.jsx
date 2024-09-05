@@ -1,20 +1,9 @@
-import { useState } from "react";
-import "./App.css";
-import VisaApprovalMain from "./Views/VisaApprovalMain";
-import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
-
+import React from "react";
+import Footer from "./Components/Footer";
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
-        </Routes>
-      </BrowserRouter>
-    </>
+  <></>
   );
 }
 
-export default App;
+export default App;
