@@ -103,11 +103,11 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bg-[#01385f] w-full mt-8 border-t border-gray-300 pt-4 flex flex-coloumn md:flex-coloumn justify-between items-center text-sm text-white ">
+      <div className="bg-[#01385f] w-full mt-8  pt-4 flex flex-coloumn md:flex-coloumn justify-between items-center text-sm text-white ">
         <p className="copyright flex flex-col">
           &copy; Copyright 2024 Daredevils
         </p>
-        <div className=" space-x-6">
+        <div className="icons space-x-6">
           <a href="#" className="hover:text-gray-600">
             <FontAwesomeIcon
               icon={faFacebook}

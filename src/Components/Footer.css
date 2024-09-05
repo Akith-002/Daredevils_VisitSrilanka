@@ -18,3 +18,9 @@
 .privacypolicy{
     margin-right: 150px;
 }
+
+.icons {
+    justify-content: start; 
+    padding-right: 70px; 
+}
+
