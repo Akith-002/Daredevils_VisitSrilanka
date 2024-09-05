@@ -1,52 +1,82 @@
 import React from "react";
 import NavbarType2 from "../Components/NavbarType2";
-import { Carousel } from "@material-tailwind/react";
+import FooterType2 from "../Components/FooterType2";
+import { Carousel, IconButton, Button } from "@material-tailwind/react";
 import image1 from "../assets/images/carousel/image1.png";
 import image2 from "../assets/images/carousel/image2.png";
 import image3 from "../assets/images/carousel/image3.png";
 import image4 from "../assets/images/carousel/image4.png";
+import { Link } from "react-router-dom";
 
 function VisaApprovalMain() {
   return (
-    <div className="w-screen h-screen">
+    <div className="size-full bg-custom-radial">
       <NavbarType2 />
-      <section className="flex justify-between w-full h-2/3 mt-20">
-        <div className="w-1/3">
-          <p className="text-4xl font-bold">
-            Start your Sri Lankan adventure with ease—apply for your visa or
-            check your approval status in just a few clicks!
+
+      <section className="flex justify-evenly items-center gap-16 w-full h-screen pt-28 pb-20 px-28">
+        <div className="w-3/4 h-3/4 flex flex-col gap-20">
+          <p className="text-5xl font-bold leading-13">
+            Start your <span className="text-[#888888]">Sri Lankan</span>{" "}
+            adventure with ease—apply for your visa or check your approval
+            status in just a few clicks!
           </p>
-          <div>
-            <button>Apply for Visa</button>
-            <button>Check your visa status</button>
+          <div className="flex justify-around w-2/3">
+            <a href="/visaapplication">
+              <Button
+                size="lg"
+                color="green"
+                variant="gradient"
+                className="shadow-lg"
+              >
+                Apply for visa
+              </Button>
+            </a>
+            <Button
+              size="lg"
+              color="light-green"
+              variant="gradient"
+              className="shadow-lg"
+            >
+              Check your visa status
+            </Button>
           </div>
         </div>
         <Carousel
           transition={{ duration: 2 }}
-          className="rounded-xl w-2/5 h-2/5"
+          className="rounded-xl w-3/5 h-full mb-8"
+          prevArrow={({ handlePrev }) => <IconButton className="hidden" />}
+          nextArrow={({ handleNext }) => <IconButton className="hidden" />}
+          navigation={({ setActiveIndex, activeIndex, length }) => {
+            <div className="hidden"></div>;
+          }}
+          autoplay={true}
+          autoplayDelay={4000}
+          loop={true}
         >
           <img
             src={image1}
             alt="image 1"
-            className="w-[670px] h-[670px] object-cover"
+            className="w-full h-full object-cover"
           />
           <img
             src={image2}
             alt="image 2"
-            className="w-[670px] h-[670px] object-cover"
+            className="w-full h-full object-cover"
           />
           <img
             src={image3}
             alt="image 3"
-            className="w-[670px] h-[670px] object-cover"
+            className="w-full h-full object-cover"
           />
           <img
             src={image4}
             alt="image 3"
-            className="w-[670px] h-[670px] object-cover"
+            className="w-full h-full object-cover"
           />
         </Carousel>
       </section>
+
+      <FooterType2 />
     </div>
   );
 }
