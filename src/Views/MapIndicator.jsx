@@ -15,13 +15,17 @@ L.Icon.Default.mergeOptions({
 // Custom component to zoom to the marker
 const ZoomToMarker = ({ position }) => {
     const map = useMap();
+
     if (position) {
         setTimeout(() => {
-            // Set the view to the marker's position and zoom in
-            map.setView(position, 10, { animate: true });
-        }, 300);
-        
+            map.flyTo(position, 10, {
+                animate: true,
+                duration: 0.7, // Increase duration for a smoother zoom
+                easeLinearity: 0.25 // Control easing to make it smoother
+            });
+        }, 300); // Slight delay before zooming to give some anticipation
     }
+
     return null;
 };
 
@@ -42,6 +46,9 @@ const MapComponent = () => {
         { position: [7.856667, 80.649167], text: 'Dambulla', description: 'A UNESCO World Heritage Site featuring a massive rock complex with over 80 caves containing intricate Buddhist paintings and sculptures, offering a spiritual and cultural experience.', image: '../Images/Map/dambulla.jpg' },
         { position: [7.189464, 79.858734], text: 'Negombo', description: 'A coastal town known for its beautiful beaches, Dutch-colonial architecture, and vibrant fishing harbor, offering a relaxed and laid-back atmosphere.', image: '../Images/Map/negombo.jpg' },
         { position: [6.00681, 80.25667], text: 'Unawatuna', description: 'A popular beach destination known for its golden sand, turquoise waters, and laid-back atmosphere. Ideal for snorkeling and relaxing.', image: '../Images/Map/unawatuna.jpg' },
+        { position: [8.582618643443995, 81.24534487116394], text: 'Thirukoneswaram Kovil', description: 'A sacred Hindu temple dedicated to Lord Shiva, known for its stunning architecture, vibrant festivals, and spiritual significance.', image: '../Images/Map/tkovil.jpg' },
+        { position: [9.674600465732622, 80.02986028650692], text: 'Nallur Kandaswamy Kovil', description: 'A renowned Hindu temple dedicated to Lord Murugan, known for its intricate carvings, vibrant festivals, and significant religious importance in the Jaffna region.', image: '../Images/Map/nallurKkovil.jpg' }
+        
     ];
 
     const centerPosition = [7.8731, 80.7718]; // Center of Sri Lanka
