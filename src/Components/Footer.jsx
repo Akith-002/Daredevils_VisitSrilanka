@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className="footer-section text-white">
       <img
-      className="logo"
+        className="logo"
         src="public\VisitSrilanka__1_-removebg-preview2.png"
         alt="Visit Sri Lanka Logo"
         style={{ width: "260px", height: "80px" }}
@@ -70,35 +70,37 @@ const Footer = () => {
 
         {/* Right Section: Stay in Touch */}
         <div className="Stay-In-Touch max-w-sm">
-  <h4 className="font-bold text-lg text-black mb-4">Stay In Touch</h4>
-  <ul>
-    <li>
-      <form className="flex space-x-2"> {/* Use flex to align input and button on the same line */}
-        <input
-          type="email"
-          placeholder="Enter Your Email"
-          className="p-2 flex-grow border border-gray-400 rounded" 
-        />
-        <button
-          type="submit"
-          className="bg-[#01385F] text-white p-2 rounded hover:bg-blue-800"
-        >
-          Subscribe
-        </button>
-      </form>
-    </li><br></br>
-    <li>
-      <h4 className="font-bold text-lg text-black mb-4">Contact</h4>
-    </li>
+          <h4 className="font-bold text-lg text-black mb-4">Stay In Touch</h4>
+          <ul>
+            <li>
+              <form className="flex space-x-2">
+                {" "}
+                {/* Use flex to align input and button on the same line */}
+                <input
+                  type="email"
+                  placeholder="Enter Your Email"
+                  className="p-2 flex-grow border border-gray-400 rounded"
+                />
+                <button
+                  type="submit"
+                  className="bg-[#01385F] text-white p-2 rounded hover:bg-blue-800"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </li>
+            <br></br>
+            <li>
+              <h4 className="font-bold text-lg text-black mb-4">Contact</h4>
+            </li>
 
-    <li>
-      <a href="#" className="hover:text-blue-800">
-        <p>Email : visit.srilank@gmail.com</p>
-      </a>
-    </li>
-  </ul>
-</div>
-
+            <li>
+              <a href="#" className="hover:text-blue-800">
+                <p>Email : visit.srilank@gmail.com</p>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="bg-[#01385f] w-full mt-8 border-t border-gray-300 pt-4 flex flex-coloumn md:flex-coloumn justify-between items-center text-sm text-white ">
@@ -107,13 +109,25 @@ const Footer = () => {
         </p>
         <div className=" space-x-6">
           <a href="#" className="hover:text-gray-600">
-            <FontAwesomeIcon icon={faFacebook} style={{ color: "#ffffff" }}size="2x" />
+            <FontAwesomeIcon
+              icon={faFacebook}
+              style={{ color: "#ffffff" }}
+              size="2x"
+            />
           </a>
           <a href="#" className="hover:text-gray-600">
-            <FontAwesomeIcon icon={faInstagram} style={{ color: "#ffffff" }} size="2x"/>
+            <FontAwesomeIcon
+              icon={faInstagram}
+              style={{ color: "#ffffff" }}
+              size="2x"
+            />
           </a>
           <a href="#" className="hover:text-gray-600">
-            <FontAwesomeIcon icon={faLinkedin} style={{ color: "#ffffff" }} size="2x" />
+            <FontAwesomeIcon
+              icon={faLinkedin}
+              style={{ color: "#ffffff" }}
+              size="2x"
+            />
           </a>
         </div>
         <div className="privacypolicy flex flex-col space-x-4 mt-4 md:mt-0">
