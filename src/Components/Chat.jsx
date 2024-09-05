@@ -208,14 +208,15 @@ const config = {
 // Main Chat component
 function Chat() {
   return (
-    <div className="p-6 w-auto mx-auto bg-white rounded-xl shadow-md space-y-4">
-      <Chatbot
-        config={config}
-        messageParser={MessageParser}
-        actionProvider={ActionProvider}
-      />
+    <div className="flex flex-col w-full h-screen max-h-screen mx-auto bg-white rounded-xl shadow-lg">
+      <div className="flex-grow">
+        <Chatbot
+          config={config}
+          messageParser={MessageParser}
+          actionProvider={ActionProvider}
+        />
+      </div>
     </div>
   );
 }
-
 export default Chat;

@@ -10,7 +10,7 @@ export default function TourMap() {
 
     const containerStyle = {
         width: '100%',
-        height: '100vh',
+        height: '90vh',
         visibility: 'visible',
     };
 
@@ -80,7 +80,7 @@ export default function TourMap() {
 
 
     return isLoaded ? (
-        <div className="w-7/12">
+        <div className="w-full ">
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 onLoad={handleMapLoad} // Trigger map load
