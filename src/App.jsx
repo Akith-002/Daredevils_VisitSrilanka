@@ -6,7 +6,7 @@ import VisaApprovalMain from "./Views/VisaApprovalMain";
 import VisaApplication from "./Views/VisaApplication";
 import Footer from "./Components/Footer";
 import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
-
+import LoginPage from "./Views/Admin-login";
 function App() {
   return (
     <>
@@ -15,6 +15,9 @@ function App() {
           <Route path="/mapcomponent" Component={MapComponent}/>
           <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
           <Route path="/visaapplication" Component={VisaApplication} />
+          <Route path="/Admin-login" Component={LoginPage} />
+          <Route path="/Footer" Component={Footer} />
+
         </Routes>
       </BrowserRouter>
     </>
