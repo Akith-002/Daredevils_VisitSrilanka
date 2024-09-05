@@ -3,9 +3,11 @@ import "./App.css";
 import VisaApprovalMain from "./Views/VisaApprovalMain";
 import ChatView from "./Views/ChatView";
 import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
+import TourMap from "./Components/TourMap";
 
 function App() {
-  return (
+
+return (
     <>
    
       <BrowserRouter>
@@ -17,6 +19,9 @@ function App() {
       </BrowserRouter>
       {/* <ChatView/> */}
     </>
+    
+    
+    
   );
 }
 
