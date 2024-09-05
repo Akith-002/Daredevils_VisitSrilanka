@@ -1,57 +1,243 @@
-import React from "react";
+import React, { useState } from "react";
 import NavbarType2 from "../Components/NavbarType2";
 import FooterType2 from "../Components/FooterType2";
-import { Field, Formik, Form } from "formik";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import axios from "axios";
+import PersonalInfo from "../Components/PersonalInfo";
+import PassportInfo from "../Components/PassportInfo";
+import VisaRequestInfo from "../Components/VisaRequestInfo";
+// import toast from "react-hot-toast"; // Assuming you are using toast notifications
+
+// Validation schema
+const validationSchema = yup.object({
+  honorific: yup.string().required("Honorific is required"),
+  name: yup.string().required("Name is required"),
+  address: yup.string().required("Address is required"),
+  dateOfBirth: yup
+    .date()
+    .min("1950-01-01")
+    .max("2005-01-01")
+    .required("Date of birth is required"),
+  phone: yup
+    .string()
+    .matches(/^\d+$/, "Phone number is not valid")
+    .required("Phone number is required"),
+  email: yup
+    .string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  passNo: yup.string().required("Passport number is required"),
+  passCountry: yup.string().required("Country of passport is required"),
+  dateOfExpiry: yup.date().required("Date of expiry is required"),
+  dateOfIssue: yup.date().required("Date of issue is required"),
+  visaType: yup.string().required("Type of visa is required"),
+  duration: yup.string().required("Duration of stay is required"),
+  visaPeriod: yup.string().required("Visa validity period is required"),
+  entryType: yup.string().required("Entry type is required"),
+  previouslyVisited: yup
+    .string()
+    .required("Previous visit information is required"),
+  extendAssitance: yup.string().required("Assistance information is required"),
+  docsReady: yup.string().required("Document information is required"),
+  TandCAgree: yup.string().required("Agreement is required"),
+  passImage: yup.mixed().required("Passport image is required"),
+  passBio: yup.mixed().required("Passport bio page is required"),
+});
 
 function VisaApplication() {
+  const [step, setStep] = useState(1); // Track which section is currently active
+  const [idCardPhoto, setIdCardPhoto] = useState(null);
+  const [personalPhoto, setPersonalPhoto] = useState(null);
+
+  const handleFileChange = (e, setFieldValue, fieldName) => {
+    const file = e.target.files[0];
+    setFieldValue(fieldName, file);
+    if (fieldName === "idCardPhoto") {
+      setIdCardPhoto(file);
+    } else if (fieldName === "personalPhoto") {
+      setPersonalPhoto(file);
+    }
+  };
+
+  // const handleSubmit = async (values) => {
+  //   const formData = new FormData();
+  //   formData.append('name', values.name);
+  //   formData.append('email', values.email);
+  //   formData.append('address', values.address);
+  //   formData.append('idCardPhoto', idCardPhoto);
+  //   formData.append('personalPhoto', personalPhoto);
+
+  //   try {
+  //     const response = await axios.post('/api/upload', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     });
+  //     console.log('Form submitted successfully:', response.data);
+  //   } catch (error) {
+  //     console.error('Error submitting form:', error);
+  //   }
+  // };
+
+  // Formik setup
+  const formik = useFormik({
+    initialValues: {
+      honorific: "",
+      name: "",
+      address: "",
+      dateOfBirth: "",
+      phone: "",
+      email: "",
+      passNo: "",
+      passCountry: "",
+      dateOfExpiry: "",
+      dateOfIssue: "",
+      visaType: "",
+      duration: "",
+      visaPeriod: "",
+      entryType: "",
+      previouslyVisited: "",
+      extendAssitance: "",
+      docsReady: "",
+      TandCAgree: "",
+      passImage: null,
+      passBio: null,
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      // Handle form submission
+      console.log(values);
+      console.log("Form submitted successfully");
+    },
+  });
+
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    formik;
+
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+
+  const handlePrevious = () => {
+    setStep(step - 1);
+  };
+
+  // when cancel button is clicked redirect to home page
+  const handleCancel = () => {
+    setStep(1);
+    window.location.href = "/visaApprovalMain";
+  };
+
   return (
     <div className="bg-backgroundImage">
       <NavbarType2 />
 
-      <section className="mt-16">
-        <h1>Visa Application</h1>
+      <section className="mt-16 mb-24">
+        <h1 className="text-2xl font-semibold">Visa Application</h1>
 
-        <Formik
-          initialValues={{
-            honorific: "",
-            name: "",
-          }}
-          onSubmit={async (values) => {
-            await new Promise((r) => setTimeout(r, 500));
-            alert(JSON.stringify(values, null, 2)); // Alert the form values on submission
-          }}
-        >
-          {({ values }) => (
-            <Form>
-              <div role="group" aria-labelledby="honorifics">
-                <label>
-                  <Field type="radio" name="honorific" value="Mr" />
-                  Mr
-                </label>
-                <label>
-                  <Field type="radio" name="honorific" value="Mrs" />
-                  Mrs
-                </label>
-                <label>
-                  <Field type="radio" name="honorific" value="Miss" />
-                  Miss
-                </label>
-              </div>
-              <div>
-                <label>
-                  Name <Field name="name" placeholder="First Name" />
-                </label>
-              </div>
-
-              <button
-                type="submit"
-                className="mt-4 p-2 bg-green-500 text-white"
-              >
-                next
-              </button>
-            </Form>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+          {step === 1 && (
+            <PersonalInfo
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              handleCancel={handleCancel}
+              handleNext={handleNext}
+            />
           )}
-        </Formik>
+
+          {step === 2 && (
+            <PassportInfo
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              handlePrevious={handlePrevious}
+              handleNext={handleNext}
+            />
+          )}
+
+          {step === 3 && (
+            <VisaRequestInfo
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              handleCancel={handleCancel}
+              handleNext={handleNext}
+            />
+          )}
+
+          {step === 4 && (
+            <>
+              <div className="h-4/5">
+                <h2>Section 4: Images</h2>
+                <div>
+                  <label
+                    htmlFor="personalPhoto"
+                    className="block text-sm font-medium text-gray-900"
+                  >
+                    Personal Image
+                  </label>
+                  <input
+                    type="file"
+                    name="passBio"
+                    id="idCardPhoto"
+                    onBlur={handleBlur}
+                    className="mt-1 block w-full text-sm text-gray-500"
+                    onChange={(e) =>
+                      handleFileChange(e, setFieldValue, "idCardPhoto")
+                    }
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="scanPassport"
+                    className="block text-sm font-medium text-gray-900"
+                  >
+                    Scanned copy of Passport
+                  </label>
+                  <input
+                    type="file"
+                    name="passImage"
+                    id="scanPassport"
+                    onBlur={handleBlur}
+                    className="mt-1 block w-full text-sm text-gray-500"
+                    onChange={(e) =>
+                      handleFileChange(e, setFieldValue, "scanPassport")
+                    }
+                    required
+                  />
+                </div>
+
+                {/* Previous and Next buttons */}
+                <div className="flex justify-between mt-4">
+                  <button
+                    type="button"
+                    onClick={handlePrevious}
+                    className="bg-gray-400 text-white px-4 py-2 rounded-md"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+        </form>
       </section>
 
       <FooterType2 />
