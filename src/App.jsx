@@ -13,6 +13,7 @@ function App() {
           <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
           <Route path="/visaapplication" Component={VisaApplication} />
           <Route path="/Admin-login" Component={LoginPage} />
+          <Route path="/Footer" Component={Footer} />
 
         </Routes>
       </BrowserRouter>
