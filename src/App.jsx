@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
+
+import MapComponent from "./Views/MapIndicator";
 import VisaApprovalMain from "./Views/VisaApprovalMain";
 import VisaApplication from "./Views/VisaApplication";
 import Footer from "./Components/Footer";
@@ -10,6 +12,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/mapcomponent" Component={MapComponent}/>
           <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
           <Route path="/visaapplication" Component={VisaApplication} />
         </Routes>
