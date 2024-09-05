@@ -1,18 +1,21 @@
 import { useState } from "react";
 import "./App.css";
 import VisaApprovalMain from "./Views/VisaApprovalMain";
+import ChatView from "./Views/ChatView";
 import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
+   
       <BrowserRouter>
         <Routes>
           <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
+          <Route path="/chatView" Component={ChatView} />
+
         </Routes>
       </BrowserRouter>
+      {/* <ChatView/> */}
     </>
   );
 }
