@@ -26,13 +26,10 @@ const validationSchema = yup.object({
     .min("1950-01-01")
     .max("2005-01-01")
     .required("Date of birth is required"),
-  // make any number with country code and hyphens accepted
+  // normal number with digits
   phone: yup
     .string()
-    .matches(
-      /^(\+?\d{1,3}[- ]?)?\d{10}$/,
-      "Phone number must be at least 10 digits"
-    )
+    .matches(/^[0-9]+$/, "Phone number must contain only digits")
     .required("Phone number is required"),
   email: yup
     .string()
