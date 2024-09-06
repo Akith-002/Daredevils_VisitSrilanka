@@ -24,4 +24,8 @@
     width: 18ch; /* Adjust this depending on the text length */
     animation: typing 4s steps(18), blink 0.75s step-end infinite;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+  
   
