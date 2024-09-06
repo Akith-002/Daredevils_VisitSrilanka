@@ -27,6 +27,9 @@ module.exports = withMT({
       lineHeight: {
         13: "3.25rem",
       },
+      fontFamily: {
+        inconsolata: ['Inconsolata', 'monospace'], // Add fallback to monospace
+      },
     },
   },
   plugins: [],
