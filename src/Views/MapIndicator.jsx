@@ -183,7 +183,9 @@ const MapComponent = () => {
 
   return (
     <div style={{ margin: "1em" }} id="discover">
-      <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
+      </div>
       <div style={{ display: "flex", height: "90vh", padding: "4em" }}>
         {/* Map Section */}
         <div className="map-box">
