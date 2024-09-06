@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 // Importing images
@@ -55,6 +56,7 @@ const Carousel = () => {
             className="w-full h-full object-cover flex-shrink-0"
             style={{ width: `${100 / images.length}%` }}
           />
+
         ))}
       </div>
     </div>
