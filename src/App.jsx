@@ -3,7 +3,7 @@ import "./App.css";
 import MapComponent from "./Views/MapIndicator";
 import VisaApprovalMain from "./Views/VisaApprovalMain";
 import ChatView from "./Views/ChatView";
-
+import { BrowserRouter,Route,Routes } from "react-router-dom";
 import TourMap from "./Components/TourMap";
 import VisaApplication from "./Views/VisaApplication";
 import Footer from "./Components/Footer";
