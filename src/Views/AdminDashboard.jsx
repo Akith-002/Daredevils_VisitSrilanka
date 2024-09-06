@@ -107,7 +107,20 @@ const AdminDashboard = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedStatus, setSelectedStatus] = useState(selectedUser?.adminApproveStatus || "Under Review"); // Default status
 
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  const handleSaveStatus = () => {
+    // Logic to save the new status (e.g., update the user data)
+    console.log("New Status:", selectedStatus);
+    // You can make an API call or update your data here
+
+    // Close the dialog after saving
+    setOpenDialog(false);
+  };
   const handleOpenDialog = (user) => {
     setSelectedUser(user); // Set the selected user data
     setOpenDialog(!openDialog); // Toggle dialog visibility
@@ -313,12 +326,12 @@ const AdminDashboard = () => {
 
       {/* Dialog for displaying user details */}
      {/* Dialog for displaying user details */}
-<Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
+     <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
   <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
-  <DialogBody className="overflow-scroll">
+  
+  <DialogBody className="overflow-y-auto max-h-96"> {/* Add scrolling */}
     {selectedUser && (
       <div className="grid grid-cols-2 gap-4">
-        {/* Displaying Passport Image */}
         <div className="col-span-2 flex justify-center">
           <img
             src={selectedUser.passImage}
@@ -327,7 +340,6 @@ const AdminDashboard = () => {
           />
         </div>
 
-        {/* Displaying each value in a neat grid */}
         <div>
           <Typography variant="h6">Passport Number:</Typography>
           <Typography>{selectedUser.passNo}</Typography>
@@ -392,17 +404,33 @@ const AdminDashboard = () => {
           <Typography variant="h6">Terms Agreed:</Typography>
           <Typography>{selectedUser.TandCAgree}</Typography>
         </div>
-
-        {/* Add more fields as required */}
+             {/* Status Select Dropdown */}
+             <div className="col-span-2">
+              <Typography variant="h6">Change Visa Status:</Typography>
+              <select
+                value={selectedStatus}
+                onChange={handleStatusChange}
+                className="border border-gray-300 rounded px-2 py-1 w-full"
+              >
+                <option value="Approved">Approved</option>
+                <option value="Under Review">Under Review</option>
+                <option value="Reject">Reject</option>
+              </select>
+            </div>
       </div>
     )}
   </DialogBody>
+  
   <DialogFooter>
-    <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
-      Close
-    </Button>
-  </DialogFooter>
+        <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
+          Close
+        </Button>
+        <Button variant="text" color="green" onClick={handleSaveStatus}>
+          Save Status
+        </Button>
+      </DialogFooter>
 </Dialog>
+
 
     </>
   );
