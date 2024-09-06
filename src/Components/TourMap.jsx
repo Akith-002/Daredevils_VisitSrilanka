@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, Marker, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
 
 const libraries = ['places'];
@@ -7,6 +7,7 @@ export default function TourMap() {
     const [selectedPlace, setSelectedPlace] = useState(null);
     const [infoWindowData, setInfoWindowData] = useState(null);
     const [map, setMap] = useState(null);
+    const [tripData, setTripData] = useState([]);
 
     const containerStyle = {
         width: '100%',
@@ -26,11 +27,24 @@ export default function TourMap() {
         libraries, // Use the predefined static libraries array
     });
 
+    // Check localStorage for tripData on component mount
+    useEffect(() => {
+        // Define the interval to check localStorage every second
+        const interval = setInterval(() => {
+            const storedTripData = localStorage.getItem('tripData');
+            if (storedTripData) {
+                setTripData(JSON.parse(storedTripData)); // Parse and set tripData
+            }
+        }, 1000); // Check every 1 second (1000 ms)
+    
+        // Cleanup the interval when the component unmounts
+        return () => clearInterval(interval);
+    }, []); 
+
     // Function to handle the map load event
     const handleMapLoad = (mapInstance) => {
         setMap(mapInstance); // Save the map instance when it's loaded
         console.log('Map loaded:', mapInstance);
-
     };
 
     const handleMarkerClick = (markerPosition) => {
@@ -39,7 +53,7 @@ export default function TourMap() {
 
             // Specify the request for place details using the placeId
             const request = {
-                placeId: 'ChIJlU8bkM5b4joRpYheBM6lUBU', // Town Hall Colombo placeId
+                placeId: 'ChIJlU8bkM5b4joRpYheBM6lUBU', // Example placeId for Town Hall Colombo
                 fields: [
                     'name',
                     'formatted_address',
@@ -53,7 +67,7 @@ export default function TourMap() {
 
             // Fetch the place details
             service.getDetails(request, (place, status) => {
-                if (status === window.google.maps.places.PlacesServiceStatus.OK) {                    
+                if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                     setInfoWindowData({
                         name: place.name,
                         address: place.formatted_address,
@@ -63,12 +77,8 @@ export default function TourMap() {
                         totalRatings: place.user_ratings_total,
                         phoneNumber: place.formatted_phone_number,
                     });
-                   
                     
-                    setSelectedPlace(markerPosition);
-
-                    // Log when the place details are successfully fetched
-                    //   console.log('Place details fetched successfully:', place);
+                    setSelectedPlace(markerPosition); // Set marker position for InfoWindow
                 } else {
                     console.error('Error fetching place details:', status);
                 }
@@ -78,9 +88,8 @@ export default function TourMap() {
         }
     };
 
-
     return isLoaded ? (
-        <div className="w-full ">
+        <div className="w-full">
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 onLoad={handleMapLoad} // Trigger map load
@@ -93,13 +102,14 @@ export default function TourMap() {
                     streetViewControl: false,
                 }}
             >
-                <Marker
-                    position={center}
-                    onClick={(e) => {
-                        console.log('Marker clicked:', e);
-                        handleMarkerClick(center);
-                    }}
-                />
+                {/* Render markers based on tripData from localStorage */}
+                {tripData.map((location, index) => (
+                    <Marker
+                        key={index}
+                        position={{ lat: location.lat, lng: location.lon }}
+                        onClick={() => handleMarkerClick({ lat: location.lat, lng: location.lon })}
+                    />
+                ))}
 
                 {/* Display the InfoWindow when a place is selected */}
                 {selectedPlace && infoWindowData && (
@@ -110,10 +120,10 @@ export default function TourMap() {
                             setSelectedPlace(null);
                         }}
                     >
-                        <div className='overflow-x-hidden'>
-                        {console.log("data",infoWindowData)}
+                        <div className="overflow-x-hidden">
+                            {console.log("data", infoWindowData)}
                             {infoWindowData.photoUrl && (
-                                <div className="flex justify-between mb-1 gap-1 w-full ">
+                                <div className="flex justify-between mb-1 gap-1 w-full">
                                     <img src={infoWindowData.photoUrl} alt="Place" className="w-32 h-20 object-cover rounded" />
                                     <img src={infoWindowData.photoUrl1} alt="Place" className="w-32 h-20 object-cover rounded" />
                                 </div>
@@ -134,11 +144,6 @@ export default function TourMap() {
                                         <span className="text-sm text-gray-600">({infoWindowData.totalRatings} reviews)</span>
                                     </div>
                                 )}
-
-                                {/* Images */}
-
-
-                               
                             </div>
                         </div>
                     </InfoWindow>

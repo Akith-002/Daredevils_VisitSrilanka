@@ -3,9 +3,30 @@ import { Chatbot, createChatBotMessage } from "react-chatbot-kit";
 import "react-chatbot-kit/build/main.css";
 import "../App.css"; // Ensure Tailwind is correctly imported
 import "./Chat.css"
+import { Directionsfetch, planMyTrip } from "../Request/PlanMyTrip";
 
 
 const userResponses = {};
+
+
+async function saveTripData(prompt) {
+  try {
+    // Await the planMyTrip function to resolve the promise
+    const data = await planMyTrip(prompt);
+    
+
+    // Convert the resolved data to a JSON string
+    const dataString = JSON.stringify(data);
+
+    // Save the data to localStorage with a key
+    localStorage.setItem('tripData', dataString);
+
+    console.log('Trip data saved successfully.');
+  } catch (error) {
+    // Handle any errors that occur during the process
+    console.error('Error saving trip data:', error);
+  }
+}
 
 // ActionProvider class
 class ActionProvider {
@@ -20,7 +41,7 @@ class ActionProvider {
       { widget: "experienceOptions" }
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], name }));
-       userResponses.name = name;
+    userResponses.name = name;
 
   };
 
@@ -59,10 +80,10 @@ class ActionProvider {
       "Thank you for your responses! We will tailor a perfect trip plan for you based on your preferences."
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], places }));
-      userResponses.places = places;
+    userResponses.places = places;
     console.log("Final user responses: ", userResponses);
-    const prompt =` I am a foreign tourist planning to visit sri lanka. I plan to do ${userResponses.experience} activities. I plan to stay around ${userResponses.duration}. I plan on visiting  ${userResponses.region} type ares but open to any similar suggestions. I want to visit ${userResponses.places}.Help me plan my trip. give me the coordinates of every location in a object with keys lat,lon,location`;
-
+    const prompt = ` I am a foreign tourist planning to visit sri lanka. I plan to do ${userResponses.experience} activities. I plan to stay around ${userResponses.duration}. I plan on visiting  ${userResponses.region} type ares but open to any similar suggestions. I want to visit ${userResponses.places}.Help me plan my trip. give me the coordinates of every location in a object with keys lat,lon, no need of text generate only the required data in a single object without new lines`;
+    saveTripData(prompt);
   };
 }
 
@@ -233,7 +254,7 @@ function Chat() {
           config={config}
           messageParser={MessageParser}
           actionProvider={ActionProvider}
-          // disableScrollToBottom
+        // disableScrollToBottom
 
         />
       </div>
