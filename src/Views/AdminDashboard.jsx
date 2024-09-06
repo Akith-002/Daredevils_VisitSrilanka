@@ -113,9 +113,11 @@ const AdminDashboard = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+
   const [selectedStatus, setSelectedStatus] = useState(
     selectedUser?.adminApproveStatus || "Under Review"
   ); // Default status
+
 
   const handleStatusChange = (event) => {
     setSelectedStatus(event.target.value);
@@ -139,8 +141,10 @@ const AdminDashboard = () => {
     <>
       <Card className="h-full w-full">
         <CardHeader floated={false} shadow={false} className="rounded-none">
+
         <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
             <span className="font-bold">Admin panel</span>
+
           </div>
         </CardHeader>
 
@@ -271,6 +275,7 @@ const AdminDashboard = () => {
                           className="text-blue-500"
                           onClick={() =>
                             handleOpenDialog({
+
                               passImage,
                               passNo,
                               name,
@@ -326,7 +331,8 @@ const AdminDashboard = () => {
         </CardFooter>
       </Card>
 
-      {/* Dialog for displaying user details */}
+    
+
       {/* Dialog for displaying user details */}
       <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
         <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
@@ -409,10 +415,12 @@ const AdminDashboard = () => {
                 </select>
               </div>{" "}
               <img
+
                 src={selectedUser.passImage}
                 alt={selectedUser.name}
                 className="w-32 h-32 rounded-full mt-4"
               />
+
             </div>
           )}
         </DialogBody>
@@ -429,6 +437,7 @@ const AdminDashboard = () => {
           </Button>
         </DialogFooter>
       </Dialog>
+
     </>
   );
 };
