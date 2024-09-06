@@ -215,7 +215,7 @@ function VisaApplication() {
                 color={activeStep === 0 ? "blue-gray" : "gray"}
                 className="font-normal"
               >
-                Details about yout account.
+                Personal Information
               </Typography>
             </div>
           </Step>
@@ -232,7 +232,7 @@ function VisaApplication() {
                 color={activeStep === 1 ? "blue-gray" : "gray"}
                 className="font-normal"
               >
-                Details about yout account.
+                Passport Information
               </Typography>
             </div>
           </Step>
@@ -249,7 +249,7 @@ function VisaApplication() {
                 color={activeStep === 2 ? "blue-gray" : "gray"}
                 className="font-normal"
               >
-                Details about yout account.
+                Visa Request Information
               </Typography>
             </div>
           </Step>
@@ -267,7 +267,7 @@ function VisaApplication() {
                 color={activeStep === 3 ? "blue-gray" : "gray"}
                 className="font-normal"
               >
-                Details about yout account.
+                Application Images
               </Typography>
             </div>
           </Step>

@@ -36,7 +36,7 @@ const ApplicationImages = ({
 
       {/* Passport Bio Page Upload */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-900 mb-2">
+        <label className="block text-sm font-semibold text-gray-700">
           Passport Bio Page
         </label>
         <input
