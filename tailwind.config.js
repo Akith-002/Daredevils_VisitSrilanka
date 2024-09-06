@@ -1,7 +1,7 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
-  content: ["./index.html", "./src//*.{js,ts,jsx,tsx}"], // Fixed the pattern to include all JS/TS files
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -28,7 +28,7 @@ module.exports = withMT({
         13: "3.25rem",
       },
       fontFamily: {
-        inconsolata: ['Inconsolata', 'monospace'], // Add fallback to monospace
+        inconsolata: ["Inconsolata", "monospace"], // Add fallback to monospace
       },
       keyframes: {
         "slide-in": {
@@ -41,7 +41,5 @@ module.exports = withMT({
       },
     },
   },
-  plugins: [
-    require("@designbycode/tailwindcss-text-stroke"),
-  ],
+  plugins: [require("@designbycode/tailwindcss-text-stroke")],
 });
