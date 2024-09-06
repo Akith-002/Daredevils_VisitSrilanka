@@ -1,11 +1,11 @@
 import React, { useState,useEffect } from "react";
 import { getApplicantDetails } from "../Request/Admin.js"; // Import the API request function
-
 import { PencilIcon } from "@heroicons/react/24/solid";
 import {
   ArrowDownTrayIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
+import NavbarType2 from "../Components/NavbarType2";
 import {
   Card,
   CardHeader,
@@ -34,7 +34,6 @@ const TABLE_HEAD = [
   "Interpol Clearance",
   "",
 ];
-
 
 const ROWS_PER_PAGE = 5; // Number of rows to display per page
 
@@ -74,7 +73,6 @@ const AdminDashboard = () => {
     selectedUser?.adminApproveStatus || "Under Review"
   ); // Default status
 
-
   const handleStatusChange = (event) => {
     setSelectedStatus(event.target.value);
   };
@@ -96,12 +94,11 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <Card className="h-full w-full">
+      <NavbarType2 />
+      <Card className="h-full w-9/10 mt-20 mx-8">
         <CardHeader floated={false} shadow={false} className="rounded-none">
-
         <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
             <span className="font-bold text-[30px]">Admin panel</span>
-
           </div>
         </CardHeader>
 
@@ -232,7 +229,6 @@ const AdminDashboard = () => {
                           className="text-blue-500"
                           onClick={() =>
                             handleOpenDialog({
-
                               passImage,
                               passNo,
                               name,
@@ -287,8 +283,6 @@ const AdminDashboard = () => {
           </Button>
         </CardFooter>
       </Card>
-
-    
 
       {/* Dialog for displaying user details */}
       <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
@@ -372,12 +366,10 @@ const AdminDashboard = () => {
                 </select>
               </div>{" "}
               <img
-
                 src={selectedUser.passImage}
                 alt={selectedUser.name}
                 className="w-32 h-32 rounded-full mt-4"
               />
-
             </div>
           )}
         </DialogBody>
@@ -394,7 +386,6 @@ const AdminDashboard = () => {
           </Button>
         </DialogFooter>
       </Dialog>
-
     </>
   );
 };
