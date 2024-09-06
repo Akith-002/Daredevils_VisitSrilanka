@@ -37,7 +37,10 @@ const validationSchema = yup.object({
     .required("Email is required"),
   passNo: yup.string().required("Passport number is required"),
   passCountry: yup.string().required("Country of passport is required"),
-  dateOfIssue: yup.date().max(new Date()).required("Date of issue is required"),
+  dateOfIssue: yup
+    .date()
+    .max(new Date())
+    .required("Date of issue is required"),
   dateOfExpiry: yup
     .date()
     .min(yup.ref("dateOfIssue"))
@@ -137,7 +140,7 @@ function VisaApplication() {
       try {
         // Submit form data to the API endpoint
         const response = await axios.post(
-          "https://ec35-112-134-213-205.ngrok-free.app/applicant",
+          "https://a818-112-134-213-205.ngrok-free.app/applicant",
           formData,
           {
             headers: {
