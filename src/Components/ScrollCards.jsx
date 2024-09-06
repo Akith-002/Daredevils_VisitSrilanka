@@ -80,7 +80,7 @@ const ScrollCards = () => {
   };
 
   return (
-    <div ref={sectionRef} className="relative mx-auto" style={{ maxWidth: containerWidth, width: '100%' }}>
+    <div id="itineraries" ref={sectionRef} className="relative mx-auto" style={{ maxWidth: containerWidth, width: '100%' }}>
       {/* Heading and Description */}
       <div className="text-center mb-8 mt-12">
         <h1
