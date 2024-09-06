@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "../Styles/mapStyle.css";
@@ -175,7 +182,7 @@ const MapComponent = () => {
   };
 
   return (
-    <div style={{ margin: "1em" }}>
+    <div style={{ margin: "1em" }} id="discover">
       <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
       <div style={{ display: "flex", height: "90vh", padding: "4em" }}>
         {/* Map Section */}
