@@ -34,8 +34,6 @@ function App() {
           <Route path="/submissionsuccess" Component={SubmissionSuccess}/>
         </Routes>
         <div className="App">
-          <Carousel />
-          <PlanYourTrip />
         </div>
       </BrowserRouter>
     </>
