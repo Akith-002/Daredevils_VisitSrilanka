@@ -100,7 +100,7 @@ const AdminDashboard = () => {
         <CardHeader floated={false} shadow={false} className="rounded-none">
 
         <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
-            <span className="font-bold">Admin panel</span>
+            <span className="font-bold text-[30px]">Admin panel</span>
 
           </div>
         </CardHeader>

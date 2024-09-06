@@ -1,106 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import NavbarType2 from "../Components/NavbarType2";
 import FooterType2 from "../Components/FooterType2";
 import { ArrowCircleLeft } from "@phosphor-icons/react";
-import { Input, Button } from "@material-tailwind/react";
+import { Input, Button, Dialog } from "@material-tailwind/react";
+import { getApplicantDetails } from "../Request/Admin";
 
-export function InputWithButton() {
-  const [passport, setPassport] = React.useState("");
-  const onChange = ({ target }) => setPassport(target.value);
 
-  const TABLE_ROWS = [
-    {
-      applicantId: 4,
-      honorifics: "Mr.",
-      name: "Baragama Arachchige Akith Chandinu",
-      address: "155/7, Gramasanwardana Road, Molligoda, Wadduwa",
-      dateOfBirth: "2002-03-01T00:00:00.000Z",
-      phoneNo: 767221011,
-      email: "akith.chandinu@gmail.com",
-      passNo: "N11399729",
-      passCountry: "Sri Lanka",
-      dateOfExpiry: "2034-05-27T00:00:00.000Z",
-      dateOfIssue: "2024-05-27T00:00:00.000Z",
-      passImage:
-        "https://zenko.syd1.digitaloceanspaces.com/applicants/Baragama%20Arachchige%20Akith%20Chandinu_1725640355050/image1.png",
-      visaType: "Tourist",
-      duration: "30 days",
-      visaPeriod: "30 days",
-      entryType: "Single Entry",
-      previouslyVisited: "No",
-      extendAssistance: "No",
-      docReady: "Yes",
-      TandCAgree: "Yes",
-      passBio:
-        "https://zenko.syd1.digitaloceanspaces.com/applicants/Baragama%20Arachchige%20Akith%20Chandinu_1725640355050/image2.png",
-      interPolCheck: "under review",
-      adminApproveStatus: "Approved",
-      submitEmailSentStatus: null,
-      approveEmailSentStatus: null,
-      createdAt: "2024-09-06T16:32:36.000Z",
-      updatedAt: "2024-09-06T16:32:36.000Z",
-    },
-    {
-      applicantId: 5,
-      honorifics: "Mr.",
-      name: "Akith",
-      address: "155/7 , colombo",
-      dateOfBirth: "2005-01-01T00:00:00.000Z",
-      phoneNo: 767221011,
-      email: "akith.chandinu@gmail.com",
-      passNo: "n1232431",
-      passCountry: "Sri Lanka",
-      dateOfExpiry: "2025-01-06T00:00:00.000Z",
-      dateOfIssue: "2024-01-01T00:00:00.000Z",
-      passImage:
-        "https://zenko.syd1.digitaloceanspaces.com/applicants/Akith_1725642036535/a18a35b0c1b26b46f5fc0d4bd6970227.jpg",
-      visaType: "Tourist",
-      duration: "30 days",
-      visaPeriod: "30 days",
-      entryType: "Single Entry",
-      previouslyVisited: "Yes",
-      extendAssistance: "No",
-      docReady: "Yes",
-      TandCAgree: "Yes",
-      passBio:
-        "https://zenko.syd1.digitaloceanspaces.com/applicants/Akith_1725642036535/passport-1.jpeg",
-      interPolCheck: null,
-      adminApproveStatus: "Approved",
-      submitEmailSentStatus: null,
-      approveEmailSentStatus: null,
-      createdAt: "2024-09-06T17:00:37.000Z",
-      updatedAt: "2024-09-06T17:00:37.000Z",
-  
-    },
-  ];
-  
-  return (
-    <div className="flex w-full max-w-[24rem] space-x-4">
-      <Input
-        type="text"
-        label="Passport number"
-        value={passport}
-        onChange={onChange}
-        className="bg-white"
-        containerProps={{
-          className: "min-w-0 flex-grow", // Allows the input to take up the available space
-        }}
-      />
-      <Button
-        size="sm"
-        color={passport ? "blue-1" : "light-blue"}
-        disabled={!passport}
-        className="rounded px-5 bg-blue-1"
-      >
-        Submit
-      </Button>
-    </div>
-  );
-}
+
+
 
 const EnterPassport = () => {
-  const [passport, setPassport] = React.useState("");
+  const [passport, setPassport] = useState("");
+  const [applicants, setApplicants] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState("");
+  const navigate = useNavigate();
+
   const onChange = ({ target }) => setPassport(target.value);
+
+  const handleSaveStatus = async () => {
+    if (selectedUser) {
+      try {
+        // Call the API to update the status
+        await updateAdminStatus(selectedUser.passNo, selectedStatus);
+        // Optionally, you can update the applicant state or refetch the data here
+        setOpenDialog(false); // Close the dialog after saving
+      } catch (error) {
+        console.error("Error saving status:", error);
+        // Handle the error here
+      }
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (passport.trim()) {
+      const applicant = applicants.find((app) => app.passNo === passport.trim());
+      if (applicant) {
+        const { adminApproveStatus, submitEmailSentStatus, approveEmailSentStatus } = applicant;
+        navigate("/visastatus", {
+          state: {
+            adminApproveStatus,
+            submitEmailSentStatus,
+            approveEmailSentStatus
+          }
+        });
+      } else {
+        setDialogMessage("Passport number doesn't exist in the database.");
+        setShowDialog(true);
+      }
+    }
+  };
+
+  const updateAdminStatus = async (applicantId, newStatus) => {
+    try {
+      const reqBody = {
+        applicantId: applicantId,
+        adminApproveStatus: newStatus,
+      };
+      const response = await axios.post('https://a818-112-134-213-205.ngrok-free.app/applicant', reqBody);
+      return response.data; // Handle the response as needed
+    } catch (error) {
+      console.error("Error updating status:", error);
+      // Handle the error here
+    }
+  };
+
+  useEffect(() => {
+    const fetchApplicantData = async () => {
+      try {
+        const data = await getApplicantDetails();
+        setApplicants(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching applicants:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchApplicantData();
+  }, []);
 
   return (
     <>
@@ -116,7 +96,7 @@ const EnterPassport = () => {
             </a>
           </div>
           <div className="mr-8">
-            <div className="w-[30rem] ">
+            <div className="w-[30rem]">
               <p className="text-black text-[40px] font-extrabold font-inconsolata mb-16">
                 Check the status of your visa application
               </p>
@@ -135,13 +115,14 @@ const EnterPassport = () => {
                   }}
                   color="blue"
                 />
-                <a href="/visastatus" className="inline-flex">
-                  {" "}
-                  {/* Use inline-flex to maintain button size */}
-                  <Button size="sm" className="rounded px-7 bg-blue-1">
-                    Submit
-                  </Button>
-                </a>
+                <Button
+                  size="sm"
+                  className="rounded px-7 bg-blue-1"
+                  onClick={handleSubmit}
+                  disabled={!passport.trim()}
+                >
+                  Submit
+                </Button>
               </div>
             </div>
           </div>
@@ -156,6 +137,24 @@ const EnterPassport = () => {
             </div>
           </div>
         </div>
+        {/* Dialog */}
+        <Dialog
+          open={showDialog}
+          onClose={() => setShowDialog(false)}
+          size="sm"
+        >
+          <div className="text-center">
+            <p className="text-black">{dialogMessage}</p>
+            <Button
+              size="sm"
+              color="blue"
+              onClick={() => setShowDialog(false)}
+              className="mt-4"
+            >
+              OK
+            </Button>
+          </div>
+        </Dialog>
       </div>
       <FooterType2 />
     </>
