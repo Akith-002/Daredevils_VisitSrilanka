@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 const ScrollCards = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,39 +29,46 @@ const ScrollCards = () => {
 
   const cards = [
     {
-      title: 'Sigiriya',
-      description: "Discover the ancient wonder of Sigiriya, a UNESCO World Heritage site. Climb Lion Rock to explore royal palace ruins, admire frescoes, and enjoy stunning summit views. A blend of history, art, and nature, Sigiriya is a must-visit landmark in Sri Lanka.",
-      image: '/images/sigiriya.jpg',
+      title: "Sigiriya",
+      description:
+        "Discover the ancient wonder of Sigiriya, a UNESCO World Heritage site. Climb Lion Rock to explore royal palace ruins, admire frescoes, and enjoy stunning summit views. A blend of history, art, and nature, Sigiriya is a must-visit landmark in Sri Lanka.",
+      image: "/images/sigiriya.jpg",
     },
     {
-      title: 'Sri Dalada Maligawa',
-      description: "Discover the spiritual heart of Sri Lanka in Kandy, home to the sacred tooth relic of Lord Buddha. Explore the rich cultural and religious heritage of this iconic temple, admire its serene architecture, and witness the centuries-old rituals still practiced today.",
-      image: '/images/Maligawa.jpg',
+      title: "Sri Dalada Maligawa",
+      description:
+        "Discover the spiritual heart of Sri Lanka in Kandy, home to the sacred tooth relic of Lord Buddha. Explore the rich cultural and religious heritage of this iconic temple, admire its serene architecture, and witness the centuries-old rituals still practiced today.",
+      image: "/images/Maligawa.jpg",
     },
     {
-      title: 'Galle Fort',
-      description: "A UNESCO World Heritage site, Galle Fort is a stunning blend of history, culture, and coastal beauty. Explore colonial-era architecture and soak in breathtaking ocean views at this iconic fortress that stands as a testament to Sri Lanka's rich past.",
-      image: '/images/Gallefort.jpg',
+      title: "Galle Fort",
+      description:
+        "A UNESCO World Heritage site, Galle Fort is a stunning blend of history, culture, and coastal beauty. Explore colonial-era architecture and soak in breathtaking ocean views at this iconic fortress that stands as a testament to Sri Lanka's rich past.",
+      image: "/images/Gallefort.jpg",
     },
     {
-      title: 'Ella',
-      description: "Nestled in Sri Lanka, Ella is a serene escape known for its stunning landscapes, tea plantations, and the iconic Nine Arches Bridge. Perfect for nature lovers, Ella offers scenic hikes, waterfalls, and a peaceful retreat into Sri Lanka’s countryside.",
-      image: '/images/Ella.jpg',
+      title: "Ella",
+      description:
+        "Nestled in Sri Lanka, Ella is a serene escape known for its stunning landscapes, tea plantations, and the iconic Nine Arches Bridge. Perfect for nature lovers, Ella offers scenic hikes, waterfalls, and a peaceful retreat into Sri Lanka’s countryside.",
+      image: "/images/Ella.jpg",
     },
     {
-      title: 'Pasikudha',
-      description: "Discover the pristine beauty of Pasikudha’s crescent-shaped bay, where calm turquoise waters meet golden sandy shores. Ideal for snorkeling, swimming, and relaxing, Pasikudha offers a serene escape into paradise on Sri Lanka’s east coast.",
-      image: '/images/pasikuda.jpeg',
+      title: "Pasikudha",
+      description:
+        "Discover the pristine beauty of Pasikudha’s crescent-shaped bay, where calm turquoise waters meet golden sandy shores. Ideal for snorkeling, swimming, and relaxing, Pasikudha offers a serene escape into paradise on Sri Lanka’s east coast.",
+      image: "/images/pasikuda.jpeg",
     },
     {
       title: "Adam's Peak",
-      description: "Sri Pada, also known as Adam's Peak, is a sacred mountain in Sri Lanka revered by multiple religions. Pilgrims climb its steep path to reach the summit, where a footprint-shaped rock is believed to be sacred. Along with spiritual significance, the peak offers stunning sunrise views over the surrounding mountains and valleys.",
-      image: '/images/sripadaya.jpg',
+      description:
+        "Sri Pada, also known as Adam's Peak, is a sacred mountain in Sri Lanka revered by multiple religions. Pilgrims climb its steep path to reach the summit, where a footprint-shaped rock is believed to be sacred. Along with spiritual significance, the peak offers stunning sunrise views over the surrounding mountains and valleys.",
+      image: "/images/sripadaya.jpg",
     },
     {
       title: "Sinharaja Rain Forest",
-      description: "Explore the lush beauty of Sinharaja Rain Forest, a UNESCO World Heritage site and biodiversity hotspot. Wander through tropical greenery, spot rare wildlife, and listen to the sounds of nature. A haven for nature lovers, Sinharaja is a must-visit for those seeking tranquility and adventure in Sri Lanka.",
-      image: '/images/sinharaja.jpg',
+      description:
+        "Explore the lush beauty of Sinharaja Rain Forest, a UNESCO World Heritage site and biodiversity hotspot. Wander through tropical greenery, spot rare wildlife, and listen to the sounds of nature. A haven for nature lovers, Sinharaja is a must-visit for those seeking tranquility and adventure in Sri Lanka.",
+      image: "/images/sinharaja.jpg",
     },
   ];
 
@@ -80,14 +87,19 @@ const ScrollCards = () => {
   };
 
   return (
-    <div ref={sectionRef} className="relative mx-auto" style={{ maxWidth: containerWidth, width: '100%' }}>
+    <div
+      ref={sectionRef}
+      id="itenararies"
+      className="relative mx-auto"
+      style={{ maxWidth: containerWidth, width: "100%" }}
+    >
       {/* Heading and Description */}
       <div className="text-center mb-8 mt-12">
         <h1
           className={`text-xl font-semibold mb-4 text-blue-900 transition-all duration-[1500ms] ease-in-out delay-500 ${
             isTextVisible
-              ? 'transform translate-y-0 opacity-100'
-              : 'transform -translate-y-10 opacity-0'
+              ? "transform translate-y-0 opacity-100"
+              : "transform -translate-y-10 opacity-0"
           }`}
         >
           Itineraries
@@ -95,11 +107,12 @@ const ScrollCards = () => {
         <p
           className={`text-2xl font-bold text-black transition-all duration-[1500ms] ease-in-out delay-700 ${
             isTextVisible
-              ? 'transform translate-y-0 opacity-100'
-              : 'transform -translate-y-10 opacity-0'
+              ? "transform translate-y-0 opacity-100"
+              : "transform -translate-y-10 opacity-0"
           }`}
         >
-          Explore our curated itineraries designed to help you discover<br />
+          Explore our curated itineraries designed to help you discover
+          <br />
           the best of Sri Lanka, tailored for every type of traveler.
         </p>
       </div>
@@ -108,10 +121,16 @@ const ScrollCards = () => {
       <div className="flex overflow-hidden" style={{ width: containerWidth }}>
         <div
           className="flex transition-transform duration-300"
-          style={{ transform: `translateX(-${currentIndex * (cardWidth + gap)}px)` }}
+          style={{
+            transform: `translateX(-${currentIndex * (cardWidth + gap)}px)`,
+          }}
         >
           {cards.map((card, index) => (
-            <div key={index} className="w-[350px] p-4" style={{ marginRight: gap }}>
+            <div
+              key={index}
+              className="w-[350px] p-4"
+              style={{ marginRight: gap }}
+            >
               <div className="bg-white rounded-lg shadow-lg h-[28rem]">
                 <img
                   src={card.image}
@@ -148,7 +167,7 @@ const ScrollCards = () => {
           <div
             key={index}
             className={`h-2 w-2 rounded-full mx-1 ${
-              currentIndex === index ? 'bg-gray-800' : 'bg-gray-400'
+              currentIndex === index ? "bg-gray-800" : "bg-gray-400"
             }`}
           ></div>
         ))}

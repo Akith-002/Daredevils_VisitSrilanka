@@ -183,7 +183,7 @@ const MapComponent = () => {
 
   return (
     <div style={{ margin: "1em" }} id="discover">
-      <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
+      <h1 className="MapIndicatorHeader text-5xl font-bold pt-24">Discover</h1>
       <div style={{ display: "flex", height: "90vh", padding: "4em" }}>
         {/* Map Section */}
         <div className="map-box">
@@ -193,8 +193,7 @@ const MapComponent = () => {
             zoomAnimation={true}
             zoomAnimationThreshold={4}
             easeLinearity={0.25}
-            style={{ height: "100%" ,zIndex: "-1" }}
-        
+            style={{ height: "100%", zIndex: "-1" }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

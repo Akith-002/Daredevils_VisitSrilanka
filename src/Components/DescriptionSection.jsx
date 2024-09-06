@@ -36,13 +36,12 @@ const TypingEffect = () => {
 // DescriptionSection Component
 const DescriptionSection = () => {
   return (
-    <section className="bg-[#f3f3f3] py-12">
+    <section id="about" className="bg-[#f3f3f3] py-12">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
         {/* Left side: Text */}
         <div className="md:w-3/5 space-y-4">
           <h1 className="text-4xl font-bold text-[#6cbe3a]">
-            Discover the Timeless Beauty of Sri Lanka:{" "}
-            <TypingEffect />
+            Discover the Timeless Beauty of Sri Lanka: <TypingEffect />
           </h1>
           <h2 className="text-xl font-semibold text-[#1b501b]">
             Join Our Journey

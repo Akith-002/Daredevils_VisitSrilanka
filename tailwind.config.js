@@ -29,8 +29,8 @@ module.exports = withMT({
       },
 
       fontFamily: {
-        inconsolata: ['Inconsolata', 'monospace'], // Add fallback to monospace
-
+        inconsolata: ["Inconsolata", "monospace"], // Add fallback to monospace
+      },
       keyframes: {
         "slide-in": {
           "0%": { transform: "translateX(-100%)", opacity: "0" },
@@ -39,11 +39,8 @@ module.exports = withMT({
       },
       animation: {
         "slide-in": "slide-in 1s ease-out forwards",
-
       },
     },
   },
-  plugins: [
-    require("@designbycode/tailwindcss-text-stroke"),
-  ],
+  plugins: [require("@designbycode/tailwindcss-text-stroke")],
 });
