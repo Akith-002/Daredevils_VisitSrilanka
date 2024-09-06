@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./App.css";
 import MapComponent from "./Views/MapIndicator";
 import VisaApprovalMain from "./Views/VisaApprovalMain";
+import ChatView from "./Views/ChatView";
+import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
+import TourMap from "./Components/TourMap";
 import VisaApplication from "./Views/VisaApplication";
 import Footer from "./Components/Footer";
 import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
@@ -14,12 +17,20 @@ import VisaStatus from "./Views/VisaStatus";
 import EnterPassport from "./Views/EnterPassport";
 import SubmissionSuccess from "./Views/SubmissionSuccess";
 
+  
+  
+  
 function App() {
   return (
     <>
+   
       <BrowserRouter>
         <Routes>
-          <Route path="/" Component={HomePage} />
+    
+      <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
+          <Route path="/chatView" Component={ChatView} />
+            
+             <Route path="/" Component={HomePage} />
           <Route path="/mapcomponent" Component={MapComponent} />
           <Route path="/visaapproval" Component={VisaApprovalMain} />
           <Route path="/visaapplication" Component={VisaApplication} />
@@ -29,9 +40,14 @@ function App() {
           <Route path="/visastatus" Component={VisaStatus} />
           <Route path="/passportcheck" Component={EnterPassport} />
           <Route path="/submissionsuccess" Component={SubmissionSuccess} />
+
         </Routes>
       </BrowserRouter>
+      
     </>
+    
+    
+    
   );
 }
 
