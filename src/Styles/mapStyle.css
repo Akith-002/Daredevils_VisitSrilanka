@@ -115,3 +115,35 @@
     font-size: 2rem;
   }
 }
+
+
+.animated-paragraph {
+  font-size: 1.2rem;
+  text-align: left;
+  margin: 1.2em 2em 0em 2em;
+  color: #333;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    filter: blur(8px); /* Add a blur effect for a smoother entrance */
+  }
+  50% {
+    opacity: 0.6; /* Transition opacity to give a fading effect */
+    transform: translateY(10px) scale(1.02); /* Slightly scale up for a bounce effect */
+    filter: blur(4px); /* Reduce blur as the element comes into view */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Final scale and position */
+    filter: blur(0); /* Remove blur */
+  }
+}
+
+
+
