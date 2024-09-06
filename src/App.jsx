@@ -25,9 +25,8 @@ function App() {
         <Routes>
     
       <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
-          <Route path="/chatView" Component={ChatView} />
-            
-             <Route path="/" Component={HomePage} />
+          <Route path="/chatView" Component={ChatView} /> 
+          <Route path="/" Component={HomePage} />
           <Route path="/mapcomponent" Component={MapComponent} />
           <Route path="/visaapproval" Component={VisaApprovalMain} />
           <Route path="/visaapplication" Component={VisaApplication} />
