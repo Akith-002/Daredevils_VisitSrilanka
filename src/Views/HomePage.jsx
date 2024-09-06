@@ -14,9 +14,8 @@ const HomePage = () => {
       <Carousel />
       <DescriptionSection />
       <ScrollCards/>
- 
       <MapIndicator />
-      <PlanYourTrip/>
+      <PlanYourTrip />
       <Footer />
     </div>
   );
