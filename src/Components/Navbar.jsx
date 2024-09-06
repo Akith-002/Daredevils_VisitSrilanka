@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -24,8 +25,8 @@ const Navbar = () => {
               "Visa Approval",
             ].map((item, index) => (
               <li key={index}>
-                <a
-                  href={
+                <Link
+                  to={
                     item === "Visa Approval"
                       ? "/visaapproval" // Directs to another page for Visa Approval
                       : `#${item.toLowerCase().replace(/\s+/g, "-")}`
@@ -33,7 +34,7 @@ const Navbar = () => {
                   className="text-white hover:underline hover:underline-offset-4 hover:text-white"
                 >
                   {item}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
