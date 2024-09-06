@@ -18,7 +18,7 @@ const Carousel = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 4500); // 3 seconds interval
+    }, 3000); // 3 seconds interval
 
     return () => {
       clearInterval(interval); // Clean up the interval on component unmount
@@ -37,7 +37,7 @@ const Carousel = () => {
           </h1>
 
           <button className="mt-4 bg-white text-[#01385F] py-2 px-4 rounded-lg hover:bg-[#01385F] hover:text-white text-lg shadow-lg transition ">
-            Start Planningt
+            Start Planning
           </button>
         </div>
       </div>
