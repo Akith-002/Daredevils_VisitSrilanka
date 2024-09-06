@@ -32,7 +32,7 @@ const PlanYourTrip = () => {
         </p>
 
         {/* Button */}
-        <button className="bg-teal-900 text-white w-56 py-3 shadow-lg shadow-teal-500/50 hover:bg-green-700 focus:outline-none rounded-lg">
+        <button className="bg-teal-900 text-white w-56 py-3 shadow-lg shadow-teal-500/50 hover:bg-green-700 focus:outline-none rounded-lg" onClick={ ()=> window.location.href = '/chatView'}>
           Start Planning
         </button>
       </div>
