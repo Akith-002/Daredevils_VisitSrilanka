@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "../Styles/mapStyle.css";
@@ -27,6 +27,33 @@ const ZoomToMarker = ({ position }) => {
         easeLinearity: 0.25, // Control easing to make it smoother
       });
     }, 300); // Slight delay before zooming to give some anticipation
+  }
+
+  return null;
+};
+
+// Enable scroll and zoom only on click
+const EnableScrollOnClick = () => {
+  const map = useMap();
+  const [enabled, setEnabled] = useState(false);
+
+  useMapEvents({
+    click() {
+      setEnabled(true);
+      map.scrollWheelZoom.enable();
+      map.doubleClickZoom.enable();
+    },
+    mouseout() {
+      setEnabled(false);
+      map.scrollWheelZoom.disable();
+      map.doubleClickZoom.disable();
+    },
+  });
+
+  // Disable zoom and scroll on initial render
+  if (!enabled) {
+    map.scrollWheelZoom.disable();
+    map.doubleClickZoom.disable();
   }
 
   return null;
@@ -148,63 +175,65 @@ const MapComponent = () => {
   };
 
   return (
-    <div style={{margin:'1em'}}>
-        <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
-        <div style={{ display: "flex", height: "90vh", padding:'4em' }}>
-            
-            {/* Map Section */}
-            <div className="map-box">
-                <MapContainer
-                center={centerPosition}
-                zoom={7}
-                zoomAnimation={true}
-                zoomAnimationThreshold={4}
-                easeLinearity={0.25}
-                style={{ height: "100%" }}
-                >
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {locations.map((location, index) => (
-                    <Marker
-                    key={index}
-                    position={location.position}
-                    eventHandlers={{ click: () => handleMarkerClick(location) }}
-                    >
-                    <Popup>{location.text}</Popup>
-                    </Marker>
-                ))}
+    <div style={{ margin: "1em" }}>
+      <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
+      <div style={{ display: "flex", height: "90vh", padding: "4em" }}>
+        {/* Map Section */}
+        <div className="map-box">
+          <MapContainer
+            center={centerPosition}
+            zoom={7}
+            zoomAnimation={true}
+            zoomAnimationThreshold={4}
+            easeLinearity={0.25}
+            style={{ height: "100%" }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {locations.map((location, index) => (
+              <Marker
+                key={index}
+                position={location.position}
+                eventHandlers={{ click: () => handleMarkerClick(location) }}
+              >
+                <Popup>{location.text}</Popup>
+              </Marker>
+            ))}
 
-                {/* Zoom to the selected marker */}
-                {selectedLocation && (
-                    <ZoomToMarker position={selectedLocation.position} />
-                )}
-                </MapContainer>
-            </div>
+            {/* Zoom to the selected marker */}
+            {selectedLocation && (
+              <ZoomToMarker position={selectedLocation.position} />
+            )}
 
-            {/* Card Section */}
-            <div className="info-box">
-                {selectedLocation ? (
-                <div className={`location-card ${isActive ? "active" : ""}`}>
-                    <img src={selectedLocation.image} alt={selectedLocation.text} />
-                    <div className="location-card-content">
-                    <h3>{selectedLocation.text}</h3>
-                    <p>{selectedLocation.description}</p>
-                    </div>
-                </div>
-                ) : (
-                <p>Select a location to see details</p>
-                )}
-            </div>
+            {/* Enable scroll and zoom on click */}
+            <EnableScrollOnClick />
+          </MapContainer>
         </div>
+
+        {/* Card Section */}
+        <div className="info-box">
+          {selectedLocation ? (
+            <div className={`location-card ${isActive ? "active" : ""}`}>
+              <img src={selectedLocation.image} alt={selectedLocation.text} />
+              <div className="location-card-content">
+                <h3>{selectedLocation.text}</h3>
+                <p>{selectedLocation.description}</p>
+              </div>
+            </div>
+          ) : (
+            <div className="location-card-placeholder">
+              Click on a marker to view details.
+            </div>
+          )}
+        </div>
+      </div>
     </div>
-    
   );
 };
 
 ZoomToMarker.propTypes = {
-  position: PropTypes.arrayOf(PropTypes.number).isRequired,
+  position: PropTypes.arrayOf(PropTypes.number).isRequired, // Ensure position is an array of numbers and required
 };
-
 export default MapComponent;
