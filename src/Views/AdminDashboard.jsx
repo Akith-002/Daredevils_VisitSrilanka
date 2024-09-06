@@ -4,6 +4,7 @@ import {
   ArrowDownTrayIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
+import NavbarType2 from "../Components/NavbarType2";
 import {
   Card,
   CardHeader,
@@ -95,7 +96,6 @@ const TABLE_ROWS = [
     approveEmailSentStatus: null,
     createdAt: "2024-09-06T17:00:37.000Z",
     updatedAt: "2024-09-06T17:00:37.000Z",
-
   },
 ];
 
@@ -114,7 +114,9 @@ const AdminDashboard = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-  const [selectedStatus, setSelectedStatus] = useState(selectedUser?.adminApproveStatus || "Under Review"); // Default status
+  const [selectedStatus, setSelectedStatus] = useState(
+    selectedUser?.adminApproveStatus || "Under Review"
+  ); // Default status
 
   const handleStatusChange = (event) => {
     setSelectedStatus(event.target.value);
@@ -136,14 +138,11 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <Card className="h-full w-full">
+      <NavbarType2 />
+      <Card className="h-full w-9/10 mt-20 mx-8">
         <CardHeader floated={false} shadow={false} className="rounded-none">
-
-        
-
           <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
             Admin panel
-
           </div>
         </CardHeader>
 
@@ -260,8 +259,7 @@ const AdminDashboard = () => {
                             color={
                               interPolCheck === "Cleared"
                                 ? "green"
-                                : interPolCheck
-                                 === "Under Review"
+                                : interPolCheck === "Under Review"
                                 ? "amber"
                                 : "red"
                             }
@@ -275,7 +273,6 @@ const AdminDashboard = () => {
                           className="text-blue-500"
                           onClick={() =>
                             handleOpenDialog({
-
                               passImage,
                               passNo,
                               name,
@@ -286,7 +283,6 @@ const AdminDashboard = () => {
                               visaType,
                               adminApproveStatus,
                               interPolCheck,
-
                             })
                           }
                         >
@@ -333,122 +329,108 @@ const AdminDashboard = () => {
       </Card>
 
       {/* Dialog for displaying user details */}
-     {/* Dialog for displaying user details */}
-<Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
-  <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
-  <DialogBody className="overflow-y-auto max-h-96">
-        {selectedUser && (
-      <div className="grid grid-cols-2 gap-4">
-        {/* Displaying Passport Image */}
-        <div className="col-span-2 flex justify-center">
-          <img
-            src={selectedUser.passImage}
-            alt={selectedUser.name}
-            className="w-32 h-32 rounded-full mt-4"
-          />
-        </div>
-
-        {/* Displaying each value in a neat grid */}
-        <div>
-          <Typography variant="h6">Passport Number:</Typography>
-          <Typography>{selectedUser.passNo}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Country of Passport:</Typography>
-          <Typography>{selectedUser.passCountry}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Visa Type:</Typography>
-          <Typography>{selectedUser.visaType}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Visa Status:</Typography>
-          <Typography>{selectedUser.adminApproveStatus}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Interpol Clearance:</Typography>
-          <Typography>{selectedUser.interPolCheck}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Email:</Typography>
-          <Typography>{selectedUser.email}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Phone Number:</Typography>
-          <Typography>{selectedUser.phoneNo}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Date of Birth:</Typography>
-          <Typography>{new Date(selectedUser.dateOfBirth).toLocaleDateString()}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Address:</Typography>
-          <Typography>{selectedUser.address}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Previously Visited:</Typography>
-          <Typography>{selectedUser.previouslyVisited}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Extend Assistance:</Typography>
-          <Typography>{selectedUser.extendAssistance}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Document Ready:</Typography>
-          <Typography>{selectedUser.docReady}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Terms Agreed:</Typography>
-          <Typography>{selectedUser.TandCAgree}</Typography>
-        </div>
-
-        <div className="col-span-1">
-              <Typography variant="h6">Change Visa Status:</Typography>
-              <select
-                value={selectedStatus}
-                onChange={handleStatusChange}
-                className="border border-gray-300 rounded px-2 py-1 w-full"
-              >
-                <option value="Approved">Approved</option>
-                <option value="Under Review">Under Review</option>
-                <option value="Reject">Reject</option>
-              </select>
-            </div>  <img
+      {/* Dialog for displaying user details */}
+      <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
+        <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
+        <DialogBody className="overflow-y-auto max-h-96">
+          {selectedUser && (
+            <div className="grid grid-cols-2 gap-4">
+              {/* Displaying Passport Image */}
+              <div className="col-span-2 flex justify-center">
+                <img
+                  src={selectedUser.passImage}
+                  alt={selectedUser.name}
+                  className="w-32 h-32 rounded-full mt-4"
+                />
+              </div>
+              {/* Displaying each value in a neat grid */}
+              <div>
+                <Typography variant="h6">Passport Number:</Typography>
+                <Typography>{selectedUser.passNo}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Country of Passport:</Typography>
+                <Typography>{selectedUser.passCountry}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Visa Type:</Typography>
+                <Typography>{selectedUser.visaType}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Visa Status:</Typography>
+                <Typography>{selectedUser.adminApproveStatus}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Interpol Clearance:</Typography>
+                <Typography>{selectedUser.interPolCheck}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Email:</Typography>
+                <Typography>{selectedUser.email}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Phone Number:</Typography>
+                <Typography>{selectedUser.phoneNo}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Date of Birth:</Typography>
+                <Typography>
+                  {new Date(selectedUser.dateOfBirth).toLocaleDateString()}
+                </Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Address:</Typography>
+                <Typography>{selectedUser.address}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Previously Visited:</Typography>
+                <Typography>{selectedUser.previouslyVisited}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Extend Assistance:</Typography>
+                <Typography>{selectedUser.extendAssistance}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Document Ready:</Typography>
+                <Typography>{selectedUser.docReady}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Terms Agreed:</Typography>
+                <Typography>{selectedUser.TandCAgree}</Typography>
+              </div>
+              <div className="col-span-1">
+                <Typography variant="h6">Change Visa Status:</Typography>
+                <select
+                  value={selectedStatus}
+                  onChange={handleStatusChange}
+                  className="border border-gray-300 rounded px-2 py-1 w-full"
+                >
+                  <option value="Approved">Approved</option>
+                  <option value="Under Review">Under Review</option>
+                  <option value="Reject">Reject</option>
+                </select>
+              </div>{" "}
+              <img
                 src={selectedUser.passImage}
                 alt={selectedUser.name}
                 className="w-32 h-32 rounded-full mt-4"
               />
-      </div>
-    )}
-  </DialogBody>
-  <DialogFooter>
-        <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
-          Close
-        </Button>
-        <Button variant="text" color="green" onClick={handleSaveStatus}>
-          Save Status
-        </Button>
-      </DialogFooter>
-</Dialog>
-
-
-            
-            
-          
-  
-
+            </div>
+          )}
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={() => setOpenDialog(false)}
+          >
+            Close
+          </Button>
+          <Button variant="text" color="green" onClick={handleSaveStatus}>
+            Save Status
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </>
   );
 };
