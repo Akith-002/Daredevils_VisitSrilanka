@@ -83,3 +83,8 @@
     padding: 1em;
   }
   
+  .MapIndicatorHeader
+  {
+    display: block;
+    text-align: center;
+  }

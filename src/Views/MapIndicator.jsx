@@ -148,53 +148,58 @@ const MapComponent = () => {
   };
 
   return (
-    <div style={{ display: "flex", height: "90vh", margin: "1rem" }}>
-      {/* Map Section */}
-      <div className="map-box">
-        <MapContainer
-          center={centerPosition}
-          zoom={7}
-          zoomAnimation={true}
-          zoomAnimationThreshold={4}
-          easeLinearity={0.25}
-          style={{ height: "100%" }}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {locations.map((location, index) => (
-            <Marker
-              key={index}
-              position={location.position}
-              eventHandlers={{ click: () => handleMarkerClick(location) }}
-            >
-              <Popup>{location.text}</Popup>
-            </Marker>
-          ))}
+    <div style={{margin:'1em'}}>
+        <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
+        <div style={{ display: "flex", height: "90vh", padding:'4em' }}>
+            
+            {/* Map Section */}
+            <div className="map-box">
+                <MapContainer
+                center={centerPosition}
+                zoom={7}
+                zoomAnimation={true}
+                zoomAnimationThreshold={4}
+                easeLinearity={0.25}
+                style={{ height: "100%" }}
+                >
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {locations.map((location, index) => (
+                    <Marker
+                    key={index}
+                    position={location.position}
+                    eventHandlers={{ click: () => handleMarkerClick(location) }}
+                    >
+                    <Popup>{location.text}</Popup>
+                    </Marker>
+                ))}
 
-          {/* Zoom to the selected marker */}
-          {selectedLocation && (
-            <ZoomToMarker position={selectedLocation.position} />
-          )}
-        </MapContainer>
-      </div>
-
-      {/* Card Section */}
-      <div className="info-box">
-        {selectedLocation ? (
-          <div className={`location-card ${isActive ? "active" : ""}`}>
-            <img src={selectedLocation.image} alt={selectedLocation.text} />
-            <div className="location-card-content">
-              <h3>{selectedLocation.text}</h3>
-              <p>{selectedLocation.description}</p>
+                {/* Zoom to the selected marker */}
+                {selectedLocation && (
+                    <ZoomToMarker position={selectedLocation.position} />
+                )}
+                </MapContainer>
             </div>
-          </div>
-        ) : (
-          <p>Select a location to see details</p>
-        )}
-      </div>
+
+            {/* Card Section */}
+            <div className="info-box">
+                {selectedLocation ? (
+                <div className={`location-card ${isActive ? "active" : ""}`}>
+                    <img src={selectedLocation.image} alt={selectedLocation.text} />
+                    <div className="location-card-content">
+                    <h3>{selectedLocation.text}</h3>
+                    <p>{selectedLocation.description}</p>
+                    </div>
+                </div>
+                ) : (
+                <p>Select a location to see details</p>
+                )}
+            </div>
+        </div>
     </div>
+    
   );
 };
 
