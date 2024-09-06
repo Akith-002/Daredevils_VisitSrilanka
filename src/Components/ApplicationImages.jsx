@@ -1,95 +1,69 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const ApplicationImages = ({
   values,
+  errors,
+  touched,
+  handleChange,
   handleBlur,
-  handleFileChange,
+  handleNext,
   handlePrevious,
-  handleSubmit,
+  handleFileChange,
   setFieldValue,
 }) => {
-  // Load existing data from localStorage on mount
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("applicationImages")) || {};
-    for (const key in savedData) {
-      if (savedData.hasOwnProperty(key)) {
-        setFieldValue(key, savedData[key]);
-      }
-    }
-  }, [setFieldValue]);
-
-  // Save data to localStorage whenever values change
-  useEffect(() => {
-    const saveDataToLocalStorage = () => {
-      localStorage.setItem("applicationImages", JSON.stringify(values));
-    };
-
-    saveDataToLocalStorage();
-  }, [values]);
-
-  // Custom submit handler to log form data and perform form submission
-  const handleFormSubmit = () => {
-    // Log the form data to the console
-    console.log("Form Data:", values);
-
-    // Perform the actual submit action (e.g., API call, navigation)
-    handleSubmit();
-  };
-
   return (
-    <div className="h-4/5">
-      <h2 className="text-xl font-semibold mb-4">Section 4: Images</h2>
+    <div className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        Section 4: Application Images
+      </h2>
 
-      {/* Personal Image */}
-      <div>
-        <label
-          htmlFor="personalPhoto"
-          className="block text-sm font-medium text-gray-900"
-        >
-          Personal Image
+      {/* Passport Image Upload */}
+      <div className="mb-6">
+        <label className="block text-sm font-semibold text-gray-700">
+          Passport Image
         </label>
         <input
           type="file"
-          name="personalPhoto"
-          id="personalPhoto"
+          name="passImage"
+          onChange={(e) => handleFileChange(e, setFieldValue, "passImage")}
           onBlur={handleBlur}
-          className="mt-1 block w-full text-sm text-gray-500"
-          onChange={(e) => handleFileChange(e, setFieldValue, "personalPhoto")}
+          className="w-full text-sm border border-gray-300 rounded-md p-2"
         />
+        {errors.passImage && touched.passImage && (
+          <p className="text-red-500 text-xs mt-1">{errors.passImage}</p>
+        )}
       </div>
 
-      {/* Scanned Passport Copy */}
-      <div className="mt-4">
-        <label
-          htmlFor="scanPassport"
-          className="block text-sm font-medium text-gray-900"
-        >
-          Scanned Copy of Passport
+      {/* Passport Bio Page Upload */}
+      <div className="mb-6">
+        <label className="block text-sm font-semibold text-gray-700">
+          Passport Bio Page
         </label>
         <input
           type="file"
-          name="scanPassport"
-          id="scanPassport"
+          name="passBio"
+          onChange={(e) => handleFileChange(e, setFieldValue, "passBio")}
           onBlur={handleBlur}
-          className="mt-1 block w-full text-sm text-gray-500"
-          onChange={(e) => handleFileChange(e, setFieldValue, "scanPassport")}
-          required
+          className="w-full text-sm border border-gray-300 rounded-md p-2"
         />
+        {errors.passBio && touched.passBio && (
+          <p className="text-red-500 text-xs mt-1">{errors.passBio}</p>
+        )}
       </div>
 
-      {/* Previous and Submit buttons */}
-      <div className="flex justify-between mt-4">
+      {/* Buttons */}
+      <div className="flex justify-between mt-6">
         <button
           type="button"
           onClick={handlePrevious}
-          className="bg-gray-400 text-white px-4 py-2 rounded-md"
+          className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md"
         >
           Previous
         </button>
         <button
           type="button"
-          onClick={handleFormSubmit}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md"
+          onClick={handleNext}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
         >
           Submit
         </button>
