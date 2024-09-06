@@ -7,7 +7,6 @@ import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
 import TourMap from "./Components/TourMap";
 import VisaApplication from "./Views/VisaApplication";
 import Footer from "./Components/Footer";
-import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
 import Carousel from "./Components/Carousel";
 import PlanYourTrip from "./Components/PlanYourTrip";
 import HomePage from "./Views/HomePage";
