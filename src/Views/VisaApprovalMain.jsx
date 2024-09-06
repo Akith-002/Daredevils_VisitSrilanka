@@ -6,7 +6,6 @@ import image1 from "../assets/images/carousel/image1.png";
 import image2 from "../assets/images/carousel/image2.png";
 import image3 from "../assets/images/carousel/image3.png";
 import image4 from "../assets/images/carousel/image4.png";
-import { Link } from "react-router-dom";
 
 function VisaApprovalMain() {
   return (
@@ -24,21 +23,20 @@ function VisaApprovalMain() {
             <a href="/visaapplication">
               <Button
                 size="lg"
-                color="green"
-                variant="gradient"
-                className="shadow-lg"
+                className="shadow-lg bg-green-1"
               >
                 Apply for visa
               </Button>
             </a>
-            <Button
-              size="lg"
-              color="light-green"
-              variant="gradient"
-              className="shadow-lg"
-            >
-              Check your visa status
-            </Button>
+            <a href="/passportcheck">
+              {" "}
+              <Button
+                size="lg"
+                className="shadow-lg bg-green-2"
+              >
+                Check your visa status
+              </Button>
+            </a>
           </div>
         </div>
         <Carousel

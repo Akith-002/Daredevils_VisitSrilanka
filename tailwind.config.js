@@ -27,6 +27,10 @@ module.exports = withMT({
       lineHeight: {
         13: "3.25rem",
       },
+
+      fontFamily: {
+        inconsolata: ['Inconsolata', 'monospace'], // Add fallback to monospace
+
       keyframes: {
         "slide-in": {
           "0%": { transform: "translateX(-100%)", opacity: "0" },
@@ -35,8 +39,11 @@ module.exports = withMT({
       },
       animation: {
         "slide-in": "slide-in 1s ease-out forwards",
+
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@designbycode/tailwindcss-text-stroke"),
+  ],
 });
