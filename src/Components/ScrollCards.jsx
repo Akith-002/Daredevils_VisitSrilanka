@@ -1,7 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const ScrollCards = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTextVisible, setIsTextVisible] = useState(false);
+  const sectionRef = useRef(null); // Create a reference for the section
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsTextVisible(true);
+        }
+      },
+      {
+        threshold: 0.2, // Trigger when 20% of the section is visible
+      }
+    );
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const cards = [
     {
@@ -41,34 +65,41 @@ const ScrollCards = () => {
     },
   ];
 
-  const cardWidth = 350; // Card width remains unchanged
-  const gap = 60; // Increased gap between cards (30px each side)
+  const cardWidth = 350;
+  const gap = 60;
   const visibleCards = 3;
-
-  // Calculate container width to fit 3 cards with increased gap
   const containerWidth = visibleCards * cardWidth + (visibleCards - 1) * gap;
-
   const maxIndex = cards.length - visibleCards;
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex < maxIndex ? prevIndex + 1 : 0
-    );
+    setCurrentIndex((prevIndex) => (prevIndex < maxIndex ? prevIndex + 1 : 0));
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : maxIndex
-    );
+    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : maxIndex));
   };
 
   return (
-    <div className="relative mx-auto" style={{ maxWidth: containerWidth, width: '100%' }}>
+    <div ref={sectionRef} className="relative mx-auto" style={{ maxWidth: containerWidth, width: '100%' }}>
       {/* Heading and Description */}
-      <div className="text-center mb-8">
-        <h1 className="text-xl font-semibold mb-4 text-blue-900">Itineraries</h1>
-        <p className="text-2xl font-bold text-black">
-          Explore our curated itineraries designed to help you discover<br /> 
+      <div className="text-center mb-8 mt-12">
+        <h1
+          className={`text-xl font-semibold mb-4 text-blue-900 transition-all duration-[1500ms] ease-in-out delay-500 ${
+            isTextVisible
+              ? 'transform translate-y-0 opacity-100'
+              : 'transform -translate-y-10 opacity-0'
+          }`}
+        >
+          Itineraries
+        </h1>
+        <p
+          className={`text-2xl font-bold text-black transition-all duration-[1500ms] ease-in-out delay-700 ${
+            isTextVisible
+              ? 'transform translate-y-0 opacity-100'
+              : 'transform -translate-y-10 opacity-0'
+          }`}
+        >
+          Explore our curated itineraries designed to help you discover<br />
           the best of Sri Lanka, tailored for every type of traveler.
         </p>
       </div>
@@ -80,11 +111,7 @@ const ScrollCards = () => {
           style={{ transform: `translateX(-${currentIndex * (cardWidth + gap)}px)` }}
         >
           {cards.map((card, index) => (
-            <div
-              key={index}
-              className="w-[350px] p-4"
-              style={{ marginRight: gap }}
-            >
+            <div key={index} className="w-[350px] p-4" style={{ marginRight: gap }}>
               <div className="bg-white rounded-lg shadow-lg h-[28rem]">
                 <img
                   src={card.image}
@@ -104,19 +131,19 @@ const ScrollCards = () => {
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg"
+        className="absolute left-[-2rem] top-1/2 transform -translate-y-1/2 bg-black text-white p-2 rounded-full shadow-lg"
       >
         &#8249;
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg"
+        className="absolute right-[-2rem] top-1/2 transform -translate-y-1/2 bg-black text-white p-2 rounded-full shadow-lg"
       >
         &#8250;
       </button>
 
       {/* Indicators */}
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 mb-6">
         {cards.slice(0, cards.length - visibleCards + 1).map((_, index) => (
           <div
             key={index}

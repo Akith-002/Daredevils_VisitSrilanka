@@ -27,10 +27,12 @@ const Carousel = () => {
 
   return (
     <div className="relative overflow-hidden w-full h-[800px]">
-      {/* Text Overlay */}
+      {/* Text Overlay with sliding animation */}
       <div className="absolute top-1/2 bottom-0 left-32 w-full h-full flex z-10">
-        <div className="text-white text-left bg-white bg-opacity-0 p-4 rounded">
-          <h1 className="text-7xl font-bold mb-4 text-stroke-[3px] text-stroke-blue-1 ">
+
+        <div className="text-white text-left bg-white bg-opacity-0 p-4 rounded animate-slide-in">
+          <h1 className="text-7xl font-bold mb-4">
+
             Best Choice <br></br>To Explore
           </h1>
 

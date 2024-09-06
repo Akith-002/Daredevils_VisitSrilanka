@@ -10,14 +10,14 @@ const VisaRequestInfo = ({
   handleNext,
 }) => {
   return (
-    <div className="h-4/5">
-      <h2 className="text-xl font-semibold mb-4">
+    <div className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg h-auto">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">
         Section 3: Visa Request Information
       </h2>
 
       {/* Type of Visa */}
-      <div>
-        <label className="block text-sm font-medium text-gray-900">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700">
           Type of Visa
         </label>
         <div className="flex space-x-4 mt-2">
@@ -30,20 +30,20 @@ const VisaRequestInfo = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 checked={values.visaType === type}
-                className="form-radio text-blue-600"
+                className="form-radio h-4 w-4 text-blue-600 border-gray-300"
               />
-              <span className="ml-2">{type}</span>
+              <span className="ml-2 text-gray-900">{type}</span>
             </label>
           ))}
         </div>
         {errors.visaType && touched.visaType && (
-          <p className="text-red-500 text-xs">{errors.visaType}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.visaType}</p>
         )}
       </div>
 
       {/* Duration of Stay */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700">
           Duration of Stay
         </label>
         <select
@@ -51,7 +51,7 @@ const VisaRequestInfo = ({
           value={values.duration}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={`rounded-md border px-2 py-1 ${
+          className={`w-full mt-2 rounded-md border px-3 py-2 ${
             errors.duration && touched.duration
               ? "border-red-500"
               : "border-gray-300"
@@ -69,13 +69,13 @@ const VisaRequestInfo = ({
           )}
         </select>
         {errors.duration && touched.duration && (
-          <p className="text-red-500 text-xs">{errors.duration}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.duration}</p>
         )}
       </div>
 
       {/* Visa Validity Period */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700">
           Visa Validity Period
         </label>
         <select
@@ -83,7 +83,7 @@ const VisaRequestInfo = ({
           value={values.visaPeriod}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={`rounded-md border px-2 py-1 ${
+          className={`w-full mt-2 rounded-md border px-3 py-2 ${
             errors.visaPeriod && touched.visaPeriod
               ? "border-red-500"
               : "border-gray-300"
@@ -106,13 +106,13 @@ const VisaRequestInfo = ({
           ))}
         </select>
         {errors.visaPeriod && touched.visaPeriod && (
-          <p className="text-red-500 text-xs">{errors.visaPeriod}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.visaPeriod}</p>
         )}
       </div>
 
       {/* Entry Type */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700">
           Entry Type
         </label>
         <div className="flex space-x-4 mt-2">
@@ -125,20 +125,20 @@ const VisaRequestInfo = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 checked={values.entryType === entry}
-                className="form-radio text-blue-600"
+                className="form-radio h-4 w-4 text-blue-600 border-gray-300"
               />
-              <span className="ml-2">{entry}</span>
+              <span className="ml-2 text-gray-900">{entry}</span>
             </label>
           ))}
         </div>
         {errors.entryType && touched.entryType && (
-          <p className="text-red-500 text-xs">{errors.entryType}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.entryType}</p>
         )}
       </div>
 
       {/* Have You Visited Previously */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700">
           Have You Visited Previously?
         </label>
         <div className="flex space-x-4 mt-2">
@@ -151,20 +151,22 @@ const VisaRequestInfo = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 checked={values.previouslyVisited === option}
-                className="form-radio text-blue-600"
+                className="form-radio h-4 w-4 text-blue-600 border-gray-300"
               />
-              <span className="ml-2">{option}</span>
+              <span className="ml-2 text-gray-900">{option}</span>
             </label>
           ))}
         </div>
         {errors.previouslyVisited && touched.previouslyVisited && (
-          <p className="text-red-500 text-xs">{errors.previouslyVisited}</p>
+          <p className="text-red-500 text-xs mt-1">
+            {errors.previouslyVisited}
+          </p>
         )}
       </div>
 
       {/* Need Assistance with Extending */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700">
           Do You Need Assistance with Extending?
         </label>
         <div className="flex space-x-4 mt-2">
@@ -177,20 +179,20 @@ const VisaRequestInfo = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 checked={values.extendAssitance === option}
-                className="form-radio text-blue-600"
+                className="form-radio h-4 w-4 text-blue-600 border-gray-300"
               />
-              <span className="ml-2">{option}</span>
+              <span className="ml-2 text-gray-900">{option}</span>
             </label>
           ))}
         </div>
         {errors.extendAssitance && touched.extendAssitance && (
-          <p className="text-red-500 text-xs">{errors.extendAssitance}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.extendAssitance}</p>
         )}
       </div>
 
       {/* Have All Necessary Documents */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700">
           Do You Have All the Necessary Documents?
         </label>
         <div className="flex space-x-4 mt-2">
@@ -203,20 +205,20 @@ const VisaRequestInfo = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 checked={values.docsReady === option}
-                className="form-radio text-blue-600"
+                className="form-radio h-4 w-4 text-blue-600 border-gray-300"
               />
-              <span className="ml-2">{option}</span>
+              <span className="ml-2 text-gray-900">{option}</span>
             </label>
           ))}
         </div>
         {errors.docsReady && touched.docsReady && (
-          <p className="text-red-500 text-xs">{errors.docsReady}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.docsReady}</p>
         )}
       </div>
 
       {/* Agree to Terms and Conditions */}
-      <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-gray-700">
           Do You Agree to the Terms and Conditions?
         </label>
         <div className="flex space-x-4 mt-2">
@@ -229,23 +231,23 @@ const VisaRequestInfo = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 checked={values.TandCAgree === option}
-                className="form-radio text-blue-600"
+                className="form-radio h-4 w-4 text-blue-600 border-gray-300"
               />
-              <span className="ml-2">{option}</span>
+              <span className="ml-2 text-gray-900">{option}</span>
             </label>
           ))}
         </div>
         {errors.TandCAgree && touched.TandCAgree && (
-          <p className="text-red-500 text-xs">{errors.TandCAgree}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.TandCAgree}</p>
         )}
       </div>
 
       {/* Previous and Next buttons */}
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-6">
         <button
           type="button"
           onClick={handlePrevious}
-          className="bg-gray-400 text-white px-4 py-2 rounded-md"
+          className="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500"
         >
           Previous
         </button>
@@ -260,7 +262,7 @@ const VisaRequestInfo = ({
             <button
               type="button"
               onClick={handleNext}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md"
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
             >
               Next
             </button>
