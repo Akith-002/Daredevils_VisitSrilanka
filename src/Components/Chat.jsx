@@ -1,7 +1,8 @@
 import React from "react";
 import { Chatbot, createChatBotMessage } from "react-chatbot-kit";
 import "react-chatbot-kit/build/main.css";
-import "tailwindcss/tailwind.css"; // Ensure Tailwind is correctly imported
+import "../App.css"; // Ensure Tailwind is correctly imported
+import "./Chat.css"
 
 
 const userResponses = {};
@@ -19,8 +20,8 @@ class ActionProvider {
       { widget: "experienceOptions" }
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], name }));
-    userResponses.name = name;
-    // console.log(`User name: ${name}`);
+       userResponses.name = name;
+
   };
 
   handleExperienceSelection = (experience) => {
@@ -30,7 +31,7 @@ class ActionProvider {
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], experience }));
     userResponses.experience = experience;
-    // console.log(`Selected experience: ${experience}`);
+
   };
 
   handleDurationSelection = (duration) => {
@@ -40,7 +41,7 @@ class ActionProvider {
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], duration }));
     userResponses.duration = duration;
-    // console.log(`Selected duration: ${duration}`);
+
   };
 
   handleRegionsSelection = (region) => {
@@ -50,7 +51,7 @@ class ActionProvider {
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], region }));
     userResponses.region = region;
-    // console.log(`Selected region: ${region}`);
+
   };
 
   handleEnd = (places) => {
@@ -58,9 +59,10 @@ class ActionProvider {
       "Thank you for your responses! We will tailor a perfect trip plan for you based on your preferences."
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], places }));
-    userResponses.places = places;
+      userResponses.places = places;
     console.log("Final user responses: ", userResponses);
     const prompt =` I am a foreign tourist planning to visit sri lanka. I plan to do ${userResponses.experience} activities. I plan to stay around ${userResponses.duration}. I plan on visiting  ${userResponses.region} type ares but open to any similar suggestions. I want to visit ${userResponses.places}.Help me plan my trip. give me the coordinates of every location in a object with keys lat,lon,location`;
+
   };
 }
 
@@ -105,7 +107,7 @@ const ExperienceOptions = (props) => {
         <button
           key={option.id}
           onClick={option.handler}
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+          className=" bg-light-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
           {option.text}
         </button>
@@ -129,7 +131,7 @@ const DurationOptions = (props) => {
         <button
           key={option.id}
           onClick={option.handler}
-          className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
+          className="bg-light-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
           {option.text}
         </button>
@@ -154,7 +156,7 @@ const RegionOptions = (props) => {
         <button
           key={option.id}
           onClick={option.handler}
-          className="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-700"
+          className="bg-light-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
           {option.text}
         </button>
@@ -177,7 +179,7 @@ const PlaceOptions = (props) => {
         <button
           key={option.id}
           onClick={option.handler}
-          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
+          className="bg-light-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
           {option.text}
         </button>
@@ -213,7 +215,7 @@ const config = {
   ],
   customStyles: {
     botMessageBox: {
-      backgroundColor: "#BEE6F2",
+      backgroundColor: "#263E7D",
     },
     chatButton: {
       backgroundColor: "#3BC2FF",
@@ -224,12 +226,15 @@ const config = {
 // Main Chat component
 function Chat() {
   return (
-    <div className="flex flex-col w-full h-screen max-h-screen mx-auto bg-white rounded-xl shadow-lg">
-      <div className="flex-grow">
+    <div className="flex flex-col w-full h-[90vh]  mx-auto bg-white rounded-xl shadow-lg">
+      <div className="flex-grow ">
         <Chatbot
+          headerText='TripPlannerBot'
           config={config}
           messageParser={MessageParser}
           actionProvider={ActionProvider}
+          // disableScrollToBottom
+
         />
       </div>
     </div>
@@ -237,3 +242,5 @@ function Chat() {
 }
 
 export default Chat;
+
+
