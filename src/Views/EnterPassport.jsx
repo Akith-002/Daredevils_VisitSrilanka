@@ -53,19 +53,7 @@ const EnterPassport = () => {
     }
   };
 
-  const updateAdminStatus = async (applicantId, newStatus) => {
-    try {
-      const reqBody = {
-        applicantId: applicantId,
-        adminApproveStatus: newStatus,
-      };
-      const response = await axios.put('https://a818-112-134-213-205.ngrok-free.app/applicant', reqBody);
-      return response.data; // Handle the response as needed
-    } catch (error) {
-      console.error("Error updating status:", error);
-      // Handle the error here
-    }
-  };
+ 
 
   useEffect(() => {
     const fetchApplicantData = async () => {

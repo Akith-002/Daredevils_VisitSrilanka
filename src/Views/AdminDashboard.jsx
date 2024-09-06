@@ -1,5 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getApplicantDetails } from "../Request/Admin.js"; // Import the API request function
+import axios from "axios"; // Ensure axios is imported
+
 import { PencilIcon } from "@heroicons/react/24/solid";
 import {
   ArrowDownTrayIcon,
@@ -43,6 +45,7 @@ const AdminDashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [applicants, setApplicants] = useState([]); // State to hold fetched data
   const [loading, setLoading] = useState(true); // To show a loading state
+  const [selectedStatus, setSelectedStatus] = useState("Under Review"); // Default status
 
   useEffect(() => {
     const fetchApplicantData = async () => {
@@ -59,33 +62,56 @@ const AdminDashboard = () => {
     fetchApplicantData();
   }, []);
 
+  const updateAdminStatus = async (applicantId, newStatus) => {
+    try {
+      const reqBody = {
+        applicantId: applicantId,
+        adminApproveStatus: newStatus,
+      };
+      const response = await axios.put(
+        "https://a818-112-134-213-205.ngrok-free.app/applicant",
+        reqBody
+      ); // Update with your API endpoint
+      return response.data; // Handle the response as needed
+    } catch (error) {
+      console.error("Error updating status:", error);
+      // Handle the error here
+    }
+  };
 
   const handleOpenDialog = (user) => {
     setSelectedUser(user); // Set the selected user data
-    setOpenDialog(!openDialog); // Toggle dialog visibility
+    setSelectedStatus(user.adminApproveStatus); // Set the status for the selected user
+    setOpenDialog(true); // Open dialog
   };
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
-  const [selectedStatus, setSelectedStatus] = useState(
-    selectedUser?.adminApproveStatus || "Under Review"
-  ); // Default status
-
   const handleStatusChange = (event) => {
     setSelectedStatus(event.target.value);
   };
 
-  const handleSaveStatus = () => {
-    // Logic to save the new status (e.g., update the user data)
-    console.log("New Status:", selectedStatus);
-    // You can make an API call or update your data here
-
-    // Close the dialog after saving
-    setOpenDialog(false);
+  const handleSaveStatus = async () => {
+    if (selectedUser) {
+      try {
+        await updateAdminStatus(selectedUser.passNo, selectedStatus); // Update the status
+        // Update the local state to reflect changes
+        setApplicants((prevApplicants) =>
+          prevApplicants.map((applicant) =>
+            applicant.passNo === selectedUser.passNo
+              ? { ...applicant, adminApproveStatus: selectedStatus }
+              : applicant
+          )
+        );
+        setOpenDialog(false); // Close the dialog after saving
+      } catch (error) {
+        console.error("Error saving status:", error);
+        // Handle any error here
+      }
+    }
   };
-  console.log(applicants);
 
   const totalPages = Math.ceil(applicants.length / ROWS_PER_PAGE);
   const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
@@ -97,7 +123,7 @@ const AdminDashboard = () => {
       <NavbarType2 />
       <Card className="h-full w-9/10 mt-20 mx-8">
         <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
+          <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
             <span className="font-bold text-[30px]">Admin panel</span>
           </div>
         </CardHeader>
@@ -143,7 +169,8 @@ const AdminDashboard = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={name}>
+                    // Use passNo as the unique key since it represents a unique passport number
+                    <tr key={passNo}>
                       <td className={classes}>
                         <div className="flex items-center gap-3">
                           <Avatar
@@ -232,9 +259,6 @@ const AdminDashboard = () => {
                               passImage,
                               passNo,
                               name,
-                              visaType,
-                              passNo,
-                              name,
                               passCountry,
                               visaType,
                               adminApproveStatus,
@@ -285,104 +309,78 @@ const AdminDashboard = () => {
       </Card>
 
       {/* Dialog for displaying user details */}
-      <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
+      <Dialog open={openDialog} handler={() => setOpenDialog(false)}>
         <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
-        <DialogBody className="overflow-y-auto max-h-96">
-          {selectedUser && (
-            <div className="grid grid-cols-2 gap-4">
-              {/* Displaying Passport Image */}
-              <div className="col-span-2 flex justify-center">
-                <img
-                  src={selectedUser.passImage}
-                  alt={selectedUser.name}
-                  className="w-32 h-32 rounded-full mt-4"
-                />
-              </div>
-              {/* Displaying each value in a neat grid */}
-              <div>
-                <Typography variant="h6">Passport Number:</Typography>
-                <Typography>{selectedUser.passNo}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Country of Passport:</Typography>
-                <Typography>{selectedUser.passCountry}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Visa Type:</Typography>
-                <Typography>{selectedUser.visaType}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Visa Status:</Typography>
-                <Typography>{selectedUser.adminApproveStatus}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Interpol Clearance:</Typography>
-                <Typography>{selectedUser.interPolCheck}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Email:</Typography>
-                <Typography>{selectedUser.email}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Phone Number:</Typography>
-                <Typography>{selectedUser.phoneNo}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Date of Birth:</Typography>
-                <Typography>
-                  {new Date(selectedUser.dateOfBirth).toLocaleDateString()}
-                </Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Address:</Typography>
-                <Typography>{selectedUser.address}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Previously Visited:</Typography>
-                <Typography>{selectedUser.previouslyVisited}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Extend Assistance:</Typography>
-                <Typography>{selectedUser.extendAssistance}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Document Ready:</Typography>
-                <Typography>{selectedUser.docReady}</Typography>
-              </div>
-              <div>
-                <Typography variant="h6">Terms Agreed:</Typography>
-                <Typography>{selectedUser.TandCAgree}</Typography>
-              </div>
-              <div className="col-span-1">
-                <Typography variant="h6">Change Visa Status:</Typography>
-                <select
-                  value={selectedStatus}
-                  onChange={handleStatusChange}
-                  className="border border-gray-300 rounded px-2 py-1 w-full"
-                >
-                  <option value="Approved">Approved</option>
-                  <option value="Under Review">Under Review</option>
-                  <option value="Reject">Reject</option>
-                </select>
-              </div>{" "}
-              <img
-                src={selectedUser.passImage}
-                alt={selectedUser.name}
-                className="w-32 h-32 rounded-full mt-4"
-              />
+        <DialogBody divider>
+          <div className="flex flex-col gap-4">
+            <div>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Passport Number: {selectedUser?.passNo}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Name: {selectedUser?.name}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Country: {selectedUser?.passCountry}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Visa Type: {selectedUser?.visaType}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Interpol Clearance: {selectedUser?.interPolCheck}
+              </Typography>
             </div>
-          )}
+            <div>
+              <label
+                htmlFor="status"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Update Status
+              </label>
+              <select
+                id="status"
+                name="status"
+                value={selectedStatus}
+                onChange={handleStatusChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value="Under Review">Under Review</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
         </DialogBody>
         <DialogFooter>
           <Button
             variant="text"
-            color="red"
+            color="blue-gray"
             onClick={() => setOpenDialog(false)}
           >
-            Close
+            Cancel
           </Button>
-          <Button variant="text" color="green" onClick={handleSaveStatus}>
-            Save Status
+          <Button variant="gradient" color="green" onClick={handleSaveStatus}>
+            Save
           </Button>
         </DialogFooter>
       </Dialog>
