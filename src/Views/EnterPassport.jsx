@@ -20,19 +20,7 @@ const EnterPassport = () => {
 
   const onChange = ({ target }) => setPassport(target.value);
 
-  const handleSaveStatus = async () => {
-    if (selectedUser) {
-      try {
-        // Call the API to update the status
-        await updateAdminStatus(selectedUser.passNo, selectedStatus);
-        // Optionally, you can update the applicant state or refetch the data here
-        setOpenDialog(false); // Close the dialog after saving
-      } catch (error) {
-        console.error("Error saving status:", error);
-        // Handle the error here
-      }
-    }
-  };
+
 
   const handleSubmit = async () => {
     if (passport.trim()) {
@@ -42,8 +30,7 @@ const EnterPassport = () => {
         navigate("/visastatus", {
           state: {
             adminApproveStatus,
-            submitEmailSentStatus,
-            approveEmailSentStatus
+          
           }
         });
       } else {

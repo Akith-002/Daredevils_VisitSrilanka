@@ -7,7 +7,6 @@ import {
   ArrowDownTrayIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import NavbarType2 from "../Components/NavbarType2";
 import {
   Card,
   CardHeader,
@@ -68,10 +67,7 @@ const AdminDashboard = () => {
         applicantId: applicantId,
         adminApproveStatus: newStatus,
       };
-      const response = await axios.put(
-        "https://a818-112-134-213-205.ngrok-free.app/applicant",
-        reqBody
-      ); // Update with your API endpoint
+      const response = await axios.put('https://your-api-endpoint', reqBody); // Update with your API endpoint
       return response.data; // Handle the response as needed
     } catch (error) {
       console.error("Error updating status:", error);
@@ -98,8 +94,8 @@ const AdminDashboard = () => {
       try {
         await updateAdminStatus(selectedUser.passNo, selectedStatus); // Update the status
         // Update the local state to reflect changes
-        setApplicants((prevApplicants) =>
-          prevApplicants.map((applicant) =>
+        setApplicants(prevApplicants =>
+          prevApplicants.map(applicant =>
             applicant.passNo === selectedUser.passNo
               ? { ...applicant, adminApproveStatus: selectedStatus }
               : applicant
@@ -120,8 +116,7 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <NavbarType2 />
-      <Card className="h-full w-9/10 mt-20 mx-8">
+      <Card className="h-full w-full">
         <CardHeader floated={false} shadow={false} className="rounded-none">
           <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
             <span className="font-bold text-[30px]">Admin panel</span>
@@ -169,8 +164,7 @@ const AdminDashboard = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    // Use passNo as the unique key since it represents a unique passport number
-                    <tr key={passNo}>
+                    <tr key={name}>
                       <td className={classes}>
                         <div className="flex items-center gap-3">
                           <Avatar
@@ -314,47 +308,24 @@ const AdminDashboard = () => {
         <DialogBody divider>
           <div className="flex flex-col gap-4">
             <div>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-normal"
-              >
+              <Typography variant="small" color="blue-gray" className="font-normal">
                 Passport Number: {selectedUser?.passNo}
               </Typography>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-normal"
-              >
+              <Typography variant="small" color="blue-gray" className="font-normal">
                 Name: {selectedUser?.name}
               </Typography>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-normal"
-              >
+              <Typography variant="small" color="blue-gray" className="font-normal">
                 Country: {selectedUser?.passCountry}
               </Typography>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-normal"
-              >
+              <Typography variant="small" color="blue-gray" className="font-normal">
                 Visa Type: {selectedUser?.visaType}
               </Typography>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-normal"
-              >
+              <Typography variant="small" color="blue-gray" className="font-normal">
                 Interpol Clearance: {selectedUser?.interPolCheck}
               </Typography>
             </div>
             <div>
-              <label
-                htmlFor="status"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="status" className="block text-sm font-medium text-gray-700">
                 Update Status
               </label>
               <select
@@ -379,7 +350,11 @@ const AdminDashboard = () => {
           >
             Cancel
           </Button>
-          <Button variant="gradient" color="green" onClick={handleSaveStatus}>
+          <Button
+            variant="gradient"
+            color="green"
+            onClick={handleSaveStatus}
+          >
             Save
           </Button>
         </DialogFooter>
