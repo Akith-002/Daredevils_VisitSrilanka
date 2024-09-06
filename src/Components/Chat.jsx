@@ -4,6 +4,9 @@ import "react-chatbot-kit/build/main.css";
 import "../App.css"; // Ensure Tailwind is correctly imported
 import "./Chat.css"
 
+
+const userResponses = {};
+
 // ActionProvider class
 class ActionProvider {
   constructor(createChatBotMessage, setStateFunc) {
@@ -17,7 +20,8 @@ class ActionProvider {
       { widget: "experienceOptions" }
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], name }));
-    console.log(`User name: ${name}`);
+       userResponses.name = name;
+
   };
 
   handleExperienceSelection = (experience) => {
@@ -26,7 +30,8 @@ class ActionProvider {
       { widget: "durationOptions" }
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], experience }));
-    console.log(`Selected experience: ${experience}`);
+    userResponses.experience = experience;
+
   };
 
   handleDurationSelection = (duration) => {
@@ -35,7 +40,8 @@ class ActionProvider {
       { widget: "regionOptions" }
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], duration }));
-    console.log(`Selected duration: ${duration}`);
+    userResponses.duration = duration;
+
   };
 
   handleRegionsSelection = (region) => {
@@ -44,7 +50,8 @@ class ActionProvider {
       { widget: "placeOptions" }
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], region }));
-    console.log(`Selected region: ${region}`);
+    userResponses.region = region;
+
   };
 
   handleEnd = (places) => {
@@ -52,7 +59,10 @@ class ActionProvider {
       "Thank you for your responses! We will tailor a perfect trip plan for you based on your preferences."
     );
     this.setState((prev) => ({ ...prev, messages: [...prev.messages, message], places }));
-    console.log(`Number of places: ${places}`);
+      userResponses.places = places;
+    console.log("Final user responses: ", userResponses);
+    const prompt =` I am a foreign tourist planning to visit sri lanka. I plan to do ${userResponses.experience} activities. I plan to stay around ${userResponses.duration}. I plan on visiting  ${userResponses.region} type ares but open to any similar suggestions. I want to visit ${userResponses.places}.Help me plan my trip. give me the coordinates of every location in a object with keys lat,lon,location`;
+
   };
 }
 
@@ -232,3 +242,5 @@ function Chat() {
 }
 
 export default Chat;
+
+
