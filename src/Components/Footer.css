@@ -1,0 +1,26 @@
+.footer-section{
+    background-color: #91B9D6;
+   
+}
+
+.pt-4{
+    padding-bottom: 1rem;
+}
+
+.Stay-In-Touch{
+  margin-right: 40px;
+}
+
+.logo{
+    margin-left: 60px;
+}
+
+.privacypolicy{
+    margin-right: 150px;
+}
+
+.icons {
+    justify-content: start; 
+    padding-right: 70px; 
+}
+

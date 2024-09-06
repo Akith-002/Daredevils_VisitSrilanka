@@ -1,0 +1,90 @@
+/* mapstyle.css */
+
+/* Container for the map and info box */
+.map-box {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .info-box {
+    width: 30%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .location-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, opacity 0.4s ease-in-out;
+    overflow: hidden;
+    width: 100%;
+    max-width: 350px;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .location-card.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .location-card img {
+    width: 100%;
+    height: 250px; /* Consistent height */
+    object-fit: cover;
+    border-bottom: 3px solid #f0f0f0;
+  }
+  
+  .location-card h3 {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 15px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .location-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 15px;
+    text-align: justify;
+    color: #555;
+  }
+  
+  .location-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+  
+  /* Smooth transition and hover effect for the card */
+  .location-card img {
+    transition: transform 0.4s ease;
+  }
+  
+  .location-card:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Info box layout for better alignment */
+  .info-box p {
+    font-size: 18px;
+    color: #777;
+    text-align: center;
+    margin: 0;
+  }
+
+  .location-card-content
+  {
+    padding: 1em;
+  }
+  
+  .MapIndicatorHeader
+  {
+    display: block;
+    text-align: center;
+  }
