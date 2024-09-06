@@ -15,7 +15,6 @@ import AdminDashboard from "./Views/AdminDashboard";
 import VisaStatus from "./Views/VisaStatus";
 import EnterPassport from "./Views/EnterPassport";
 import SubmissionSuccess from "./Views/SubmissionSuccess";
-import VisaForm from "./Views/VisaForm";
 
 function App() {
   return (
@@ -32,7 +31,6 @@ function App() {
           <Route path="/visastatus" Component={VisaStatus} />
           <Route path="/passportcheck" Component={EnterPassport} />
           <Route path="/submissionsuccess" Component={SubmissionSuccess} />{" "}
-          <Route path="/visaform" Component={VisaForm} />
         </Routes>
         <div className="App"></div>
       </BrowserRouter>
