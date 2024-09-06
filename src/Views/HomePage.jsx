@@ -5,7 +5,6 @@ import DescriptionSection from "../Components/DescriptionSection";
 import Footer from "../Components/Footer";
 import MapIndicator from "../Views/MapIndicator";
 import ScrollCards from "../Components/ScrollCards";
-import PlanYourTrip from "../Components/PlanYourTrip";
 
 const HomePage = () => {
   return (
@@ -15,7 +14,6 @@ const HomePage = () => {
       <ScrollCards/>
       <DescriptionSection />
       <MapIndicator />
-      <PlanYourTrip/>
       <Footer />
     </div>
   );

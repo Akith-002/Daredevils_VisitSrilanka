@@ -18,7 +18,7 @@ const Carousel = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 4500); // 3 seconds interval
+    }, 3000); // 3 seconds interval
 
     return () => {
       clearInterval(interval); // Clean up the interval on component unmount
