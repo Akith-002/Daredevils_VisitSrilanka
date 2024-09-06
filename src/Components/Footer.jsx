@@ -9,7 +9,7 @@ import "./footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer-section text-white">
+    <footer className="footer-section text-white ">
       <img
         className="logo"
         src="public\VisitSrilanka__1_-removebg-preview2.png"
@@ -103,7 +103,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bg-[#01385f] w-full mt-8  pt-4 flex flex-coloumn md:flex-coloumn justify-between items-center text-sm text-white ">
+      <div className="bg-gradient-to-r from-blue-3 to-blue-4 w-full mt-8  pt-4 flex flex-coloumn md:flex-coloumn justify-between items-center text-sm text-white ">
         <p className="copyright flex flex-col">
           &copy; Copyright 2024 Daredevils
         </p>
