@@ -82,7 +82,7 @@ const ScrollCards = () => {
   return (
     <div id="itineraries" ref={sectionRef} className="relative mx-auto mb-16"  style={{ maxWidth: containerWidth, width: '100%' }}>
       {/* Heading and Description */}
-      <div className="text-center mb-8 mt-12">
+      <div className="text-center mb-12 mt-20">
         <h1
           className={`text-xl font-semibold mb-4 text-blue-900 transition-all duration-[1500ms] ease-in-out delay-500 ${
             isTextVisible

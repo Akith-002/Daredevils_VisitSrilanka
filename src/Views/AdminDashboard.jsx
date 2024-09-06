@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { getApplicantDetails } from "../Request/Admin.js"; // Import the API request function
 import { PencilIcon } from "@heroicons/react/24/solid";
 import {
   ArrowDownTrayIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
+import NavbarType2 from "../Components/NavbarType2";
 import {
   Card,
   CardHeader,
@@ -33,78 +35,30 @@ const TABLE_HEAD = [
   "",
 ];
 
-const TABLE_ROWS = [
-  {
-    applicantId: 4,
-    honorifics: "Mr.",
-    name: "Baragama Arachchige Akith Chandinu",
-    address: "155/7, Gramasanwardana Road, Molligoda, Wadduwa",
-    dateOfBirth: "2002-03-01T00:00:00.000Z",
-    phoneNo: 767221011,
-    email: "akith.chandinu@gmail.com",
-    passNo: "N11399729",
-    passCountry: "Sri Lanka",
-    dateOfExpiry: "2034-05-27T00:00:00.000Z",
-    dateOfIssue: "2024-05-27T00:00:00.000Z",
-    passImage:
-      "https://zenko.syd1.digitaloceanspaces.com/applicants/Baragama%20Arachchige%20Akith%20Chandinu_1725640355050/image1.png",
-    visaType: "Tourist",
-    duration: "30 days",
-    visaPeriod: "30 days",
-    entryType: "Single Entry",
-    previouslyVisited: "No",
-    extendAssistance: "No",
-    docReady: "Yes",
-    TandCAgree: "Yes",
-    passBio:
-      "https://zenko.syd1.digitaloceanspaces.com/applicants/Baragama%20Arachchige%20Akith%20Chandinu_1725640355050/image2.png",
-    interPolCheck: "under review",
-    adminApproveStatus: "Approved",
-    submitEmailSentStatus: null,
-    approveEmailSentStatus: null,
-    createdAt: "2024-09-06T16:32:36.000Z",
-    updatedAt: "2024-09-06T16:32:36.000Z",
-  },
-  {
-    applicantId: 5,
-    honorifics: "Mr.",
-    name: "Akith",
-    address: "155/7 , colombo",
-    dateOfBirth: "2005-01-01T00:00:00.000Z",
-    phoneNo: 767221011,
-    email: "akith.chandinu@gmail.com",
-    passNo: "n1232431",
-    passCountry: "Sri Lanka",
-    dateOfExpiry: "2025-01-06T00:00:00.000Z",
-    dateOfIssue: "2024-01-01T00:00:00.000Z",
-    passImage:
-      "https://zenko.syd1.digitaloceanspaces.com/applicants/Akith_1725642036535/a18a35b0c1b26b46f5fc0d4bd6970227.jpg",
-    visaType: "Tourist",
-    duration: "30 days",
-    visaPeriod: "30 days",
-    entryType: "Single Entry",
-    previouslyVisited: "Yes",
-    extendAssistance: "No",
-    docReady: "Yes",
-    TandCAgree: "Yes",
-    passBio:
-      "https://zenko.syd1.digitaloceanspaces.com/applicants/Akith_1725642036535/passport-1.jpeg",
-    interPolCheck: null,
-    adminApproveStatus: "Approved",
-    submitEmailSentStatus: null,
-    approveEmailSentStatus: null,
-    createdAt: "2024-09-06T17:00:37.000Z",
-    updatedAt: "2024-09-06T17:00:37.000Z",
-
-  },
-];
-
 const ROWS_PER_PAGE = 5; // Number of rows to display per page
 
 const AdminDashboard = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [applicants, setApplicants] = useState([]); // State to hold fetched data
+  const [loading, setLoading] = useState(true); // To show a loading state
+
+  useEffect(() => {
+    const fetchApplicantData = async () => {
+      try {
+        const data = await getApplicantDetails(); // Fetch data from API
+        setApplicants(data); // Update state with fetched data
+        setLoading(false); // Stop loading
+      } catch (error) {
+        console.error("Error fetching applicants:", error);
+        setLoading(false); // Stop loading on error
+      }
+    };
+
+    fetchApplicantData();
+  }, []);
+
 
   const handleOpenDialog = (user) => {
     setSelectedUser(user); // Set the selected user data
@@ -114,7 +68,10 @@ const AdminDashboard = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-  const [selectedStatus, setSelectedStatus] = useState(selectedUser?.adminApproveStatus || "Under Review"); // Default status
+
+  const [selectedStatus, setSelectedStatus] = useState(
+    selectedUser?.adminApproveStatus || "Under Review"
+  ); // Default status
 
   const handleStatusChange = (event) => {
     setSelectedStatus(event.target.value);
@@ -128,22 +85,20 @@ const AdminDashboard = () => {
     // Close the dialog after saving
     setOpenDialog(false);
   };
+  console.log(applicants);
 
-  const totalPages = Math.ceil(TABLE_ROWS.length / ROWS_PER_PAGE);
+  const totalPages = Math.ceil(applicants.length / ROWS_PER_PAGE);
   const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
   const endIndex = startIndex + ROWS_PER_PAGE;
-  const currentRows = TABLE_ROWS.slice(startIndex, endIndex);
+  const currentRows = applicants.slice(startIndex, endIndex);
 
   return (
     <>
-      <Card className="h-full w-full">
+      <NavbarType2 />
+      <Card className="h-full w-9/10 mt-20 mx-8">
         <CardHeader floated={false} shadow={false} className="rounded-none">
-
-        
-
-          <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-            Admin panel
-
+        <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
+            <span className="font-bold text-[30px]">Admin panel</span>
           </div>
         </CardHeader>
 
@@ -260,8 +215,7 @@ const AdminDashboard = () => {
                             color={
                               interPolCheck === "Cleared"
                                 ? "green"
-                                : interPolCheck
-                                 === "Under Review"
+                                : interPolCheck === "Under Review"
                                 ? "amber"
                                 : "red"
                             }
@@ -275,7 +229,6 @@ const AdminDashboard = () => {
                           className="text-blue-500"
                           onClick={() =>
                             handleOpenDialog({
-
                               passImage,
                               passNo,
                               name,
@@ -286,7 +239,6 @@ const AdminDashboard = () => {
                               visaType,
                               adminApproveStatus,
                               interPolCheck,
-
                             })
                           }
                         >
@@ -333,122 +285,107 @@ const AdminDashboard = () => {
       </Card>
 
       {/* Dialog for displaying user details */}
-     {/* Dialog for displaying user details */}
-<Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
-  <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
-  <DialogBody className="overflow-y-auto max-h-96">
-        {selectedUser && (
-      <div className="grid grid-cols-2 gap-4">
-        {/* Displaying Passport Image */}
-        <div className="col-span-2 flex justify-center">
-          <img
-            src={selectedUser.passImage}
-            alt={selectedUser.name}
-            className="w-32 h-32 rounded-full mt-4"
-          />
-        </div>
-
-        {/* Displaying each value in a neat grid */}
-        <div>
-          <Typography variant="h6">Passport Number:</Typography>
-          <Typography>{selectedUser.passNo}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Country of Passport:</Typography>
-          <Typography>{selectedUser.passCountry}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Visa Type:</Typography>
-          <Typography>{selectedUser.visaType}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Visa Status:</Typography>
-          <Typography>{selectedUser.adminApproveStatus}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Interpol Clearance:</Typography>
-          <Typography>{selectedUser.interPolCheck}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Email:</Typography>
-          <Typography>{selectedUser.email}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Phone Number:</Typography>
-          <Typography>{selectedUser.phoneNo}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Date of Birth:</Typography>
-          <Typography>{new Date(selectedUser.dateOfBirth).toLocaleDateString()}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Address:</Typography>
-          <Typography>{selectedUser.address}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Previously Visited:</Typography>
-          <Typography>{selectedUser.previouslyVisited}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Extend Assistance:</Typography>
-          <Typography>{selectedUser.extendAssistance}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Document Ready:</Typography>
-          <Typography>{selectedUser.docReady}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Terms Agreed:</Typography>
-          <Typography>{selectedUser.TandCAgree}</Typography>
-        </div>
-
-        <div className="col-span-1">
-              <Typography variant="h6">Change Visa Status:</Typography>
-              <select
-                value={selectedStatus}
-                onChange={handleStatusChange}
-                className="border border-gray-300 rounded px-2 py-1 w-full"
-              >
-                <option value="Approved">Approved</option>
-                <option value="Under Review">Under Review</option>
-                <option value="Reject">Reject</option>
-              </select>
-            </div>  <img
+      <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
+        <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
+        <DialogBody className="overflow-y-auto max-h-96">
+          {selectedUser && (
+            <div className="grid grid-cols-2 gap-4">
+              {/* Displaying Passport Image */}
+              <div className="col-span-2 flex justify-center">
+                <img
+                  src={selectedUser.passImage}
+                  alt={selectedUser.name}
+                  className="w-32 h-32 rounded-full mt-4"
+                />
+              </div>
+              {/* Displaying each value in a neat grid */}
+              <div>
+                <Typography variant="h6">Passport Number:</Typography>
+                <Typography>{selectedUser.passNo}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Country of Passport:</Typography>
+                <Typography>{selectedUser.passCountry}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Visa Type:</Typography>
+                <Typography>{selectedUser.visaType}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Visa Status:</Typography>
+                <Typography>{selectedUser.adminApproveStatus}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Interpol Clearance:</Typography>
+                <Typography>{selectedUser.interPolCheck}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Email:</Typography>
+                <Typography>{selectedUser.email}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Phone Number:</Typography>
+                <Typography>{selectedUser.phoneNo}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Date of Birth:</Typography>
+                <Typography>
+                  {new Date(selectedUser.dateOfBirth).toLocaleDateString()}
+                </Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Address:</Typography>
+                <Typography>{selectedUser.address}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Previously Visited:</Typography>
+                <Typography>{selectedUser.previouslyVisited}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Extend Assistance:</Typography>
+                <Typography>{selectedUser.extendAssistance}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Document Ready:</Typography>
+                <Typography>{selectedUser.docReady}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Terms Agreed:</Typography>
+                <Typography>{selectedUser.TandCAgree}</Typography>
+              </div>
+              <div className="col-span-1">
+                <Typography variant="h6">Change Visa Status:</Typography>
+                <select
+                  value={selectedStatus}
+                  onChange={handleStatusChange}
+                  className="border border-gray-300 rounded px-2 py-1 w-full"
+                >
+                  <option value="Approved">Approved</option>
+                  <option value="Under Review">Under Review</option>
+                  <option value="Reject">Reject</option>
+                </select>
+              </div>{" "}
+              <img
                 src={selectedUser.passImage}
                 alt={selectedUser.name}
                 className="w-32 h-32 rounded-full mt-4"
               />
-      </div>
-    )}
-  </DialogBody>
-  <DialogFooter>
-        <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
-          Close
-        </Button>
-        <Button variant="text" color="green" onClick={handleSaveStatus}>
-          Save Status
-        </Button>
-      </DialogFooter>
-</Dialog>
-
-
-            
-            
-          
-  
-
+            </div>
+          )}
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={() => setOpenDialog(false)}
+          >
+            Close
+          </Button>
+          <Button variant="text" color="green" onClick={handleSaveStatus}>
+            Save Status
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </>
   );
 };
