@@ -26,7 +26,7 @@ const TABLE_HEAD = [
   "Image",
   "Passport number",
   "Name",
-  "Country",
+  "passCountry",
   "Visa Type",
   "Visa Status",
   "Interpol Clearance",
@@ -35,6 +35,7 @@ const TABLE_HEAD = [
 
 const TABLE_ROWS = [
   {
+
     img: "https://randomuser.me/api/portraits/men/1.jpg",
     passportNumber: "M1234567",
     name: "John Doe",
@@ -213,8 +214,74 @@ const TABLE_ROWS = [
     visaType: "Business",
     visaStatus: "Denied",
     interpolClearance: "Cleared",
+=======
+    applicantId: 4,
+    honorifics: "Mr.",
+    name: "Baragama Arachchige Akith Chandinu",
+    address: "155/7, Gramasanwardana Road, Molligoda, Wadduwa",
+    dateOfBirth: "2002-03-01T00:00:00.000Z",
+    phoneNo: 767221011,
+    email: "akith.chandinu@gmail.com",
+    passNo: "N11399729",
+    passCountry: "Sri Lanka",
+    dateOfExpiry: "2034-05-27T00:00:00.000Z",
+    dateOfIssue: "2024-05-27T00:00:00.000Z",
+    passImage:
+      "https://zenko.syd1.digitaloceanspaces.com/applicants/Baragama%20Arachchige%20Akith%20Chandinu_1725640355050/image1.png",
+    visaType: "Tourist",
+    duration: "30 days",
+    visaPeriod: "30 days",
+    entryType: "Single Entry",
+    previouslyVisited: "No",
+    extendAssistance: "No",
+    docReady: "Yes",
+    TandCAgree: "Yes",
+    passBio:
+      "https://zenko.syd1.digitaloceanspaces.com/applicants/Baragama%20Arachchige%20Akith%20Chandinu_1725640355050/image2.png",
+    interPolCheck: "under review",
+    adminApproveStatus: "Approved",
+    submitEmailSentStatus: null,
+    approveEmailSentStatus: null,
+    createdAt: "2024-09-06T16:32:36.000Z",
+    updatedAt: "2024-09-06T16:32:36.000Z",
+  },
+  {
+    applicantId: 5,
+    honorifics: "Mr.",
+    name: "Akith",
+    address: "155/7 , colombo",
+    dateOfBirth: "2005-01-01T00:00:00.000Z",
+    phoneNo: 767221011,
+    email: "akith.chandinu@gmail.com",
+    passNo: "n1232431",
+    
+    
+    
+    passCountry: "Sri Lanka",
+    dateOfExpiry: "2025-01-06T00:00:00.000Z",
+    dateOfIssue: "2024-01-01T00:00:00.000Z",
+    passImage:
+      "https://zenko.syd1.digitaloceanspaces.com/applicants/Akith_1725642036535/a18a35b0c1b26b46f5fc0d4bd6970227.jpg",
+    visaType: "Tourist",
+    duration: "30 days",
+    visaPeriod: "30 days",
+    entryType: "Single Entry",
+    previouslyVisited: "Yes",
+    extendAssistance: "No",
+    docReady: "Yes",
+    TandCAgree: "Yes",
+    passBio:
+      "https://zenko.syd1.digitaloceanspaces.com/applicants/Akith_1725642036535/passport-1.jpeg",
+    interPolCheck: null,
+    adminApproveStatus: "Approved",
+    submitEmailSentStatus: null,
+    approveEmailSentStatus: null,
+    createdAt: "2024-09-06T17:00:37.000Z",
+    updatedAt: "2024-09-06T17:00:37.000Z",
+
   },
 ];
+
 const ROWS_PER_PAGE = 5; // Number of rows to display per page
 
 const AdminDashboard = () => {
@@ -240,8 +307,13 @@ const AdminDashboard = () => {
     <>
       <Card className="h-full w-full">
         <CardHeader floated={false} shadow={false} className="rounded-none">
+
           <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
             <span className="font-bold">Admin panel</span>
+
+          <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+            Admin panel
+
           </div>
         </CardHeader>
 
@@ -270,13 +342,13 @@ const AdminDashboard = () => {
               {currentRows.map(
                 (
                   {
-                    img,
-                    passportNumber,
+                    passImage,
+                    passNo,
                     name,
-                    country,
+                    passCountry,
                     visaType,
-                    visaStatus,
-                    interpolClearance,
+                    adminApproveStatus,
+                    interPolCheck,
                   },
                   index
                 ) => {
@@ -290,7 +362,7 @@ const AdminDashboard = () => {
                       <td className={classes}>
                         <div className="flex items-center gap-3">
                           <Avatar
-                            src={img}
+                            src={passImage}
                             alt={name}
                             size="md"
                             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
@@ -303,7 +375,7 @@ const AdminDashboard = () => {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {passportNumber}
+                          {passNo}
                         </Typography>
                       </td>
                       <td className={classes}>
@@ -321,7 +393,7 @@ const AdminDashboard = () => {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {country}
+                          {passCountry}
                         </Typography>
                       </td>
                       <td className={classes}>
@@ -338,11 +410,11 @@ const AdminDashboard = () => {
                           <Chip
                             size="sm"
                             variant="ghost"
-                            value={visaStatus}
+                            value={adminApproveStatus}
                             color={
-                              visaStatus === "Approved"
+                              adminApproveStatus === "Approved"
                                 ? "green"
-                                : visaStatus === "Pending"
+                                : adminApproveStatus === "Pending"
                                 ? "amber"
                                 : "red"
                             }
@@ -354,11 +426,12 @@ const AdminDashboard = () => {
                           <Chip
                             size="sm"
                             variant="ghost"
-                            value={interpolClearance}
+                            value={interPolCheck}
                             color={
-                              interpolClearance === "Cleared"
+                              interPolCheck === "Cleared"
                                 ? "green"
-                                : interpolClearance === "Under Review"
+                                : interPolCheck
+                                 === "Under Review"
                                 ? "amber"
                                 : "red"
                             }
@@ -372,6 +445,7 @@ const AdminDashboard = () => {
                           className="text-blue-500"
                           onClick={() =>
                             handleOpenDialog({
+
                               img,
                               passportNumber,
                               name,
@@ -379,6 +453,15 @@ const AdminDashboard = () => {
                               visaType,
                               visaStatus,
                               interpolClearance,
+
+                              passImage,
+                              passNo,
+                              name,
+                              passCountry,
+                              visaType,
+                              adminApproveStatus,
+                              interPolCheck,
+
                             })
                           }
                         >
@@ -425,25 +508,98 @@ const AdminDashboard = () => {
       </Card>
 
       {/* Dialog for displaying user details */}
-      <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
-        <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
-        <DialogBody className="overflow-scroll">
-          {selectedUser && (
-            <div>
-              <Typography variant="h6">Passport Number:</Typography>
-              <Typography>{selectedUser.passportNumber}</Typography>
+     {/* Dialog for displaying user details */}
+<Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
+  <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
+  <DialogBody className="overflow-scroll">
+    {selectedUser && (
+      <div className="grid grid-cols-2 gap-4">
+        {/* Displaying Passport Image */}
+        <div className="col-span-2 flex justify-center">
+          <img
+            src={selectedUser.passImage}
+            alt={selectedUser.name}
+            className="w-32 h-32 rounded-full mt-4"
+          />
+        </div>
 
-              <Typography variant="h6">Country:</Typography>
-              <Typography>{selectedUser.country}</Typography>
+        {/* Displaying each value in a neat grid */}
+        <div>
+          <Typography variant="h6">Passport Number:</Typography>
+          <Typography>{selectedUser.passNo}</Typography>
+        </div>
 
-              <Typography variant="h6">Visa Type:</Typography>
-              <Typography>{selectedUser.visaType}</Typography>
+        <div>
+          <Typography variant="h6">Country of Passport:</Typography>
+          <Typography>{selectedUser.passCountry}</Typography>
+        </div>
 
-              <Typography variant="h6">Visa Status:</Typography>
-              <Typography>{selectedUser.visaStatus}</Typography>
+        <div>
+          <Typography variant="h6">Visa Type:</Typography>
+          <Typography>{selectedUser.visaType}</Typography>
+        </div>
 
-              <Typography variant="h6">Interpol Clearance:</Typography>
-              <Typography>{selectedUser.interpolClearance}</Typography>
+        <div>
+          <Typography variant="h6">Visa Status:</Typography>
+          <Typography>{selectedUser.adminApproveStatus}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Interpol Clearance:</Typography>
+          <Typography>{selectedUser.interPolCheck}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Email:</Typography>
+          <Typography>{selectedUser.email}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Phone Number:</Typography>
+          <Typography>{selectedUser.phoneNo}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Date of Birth:</Typography>
+          <Typography>{new Date(selectedUser.dateOfBirth).toLocaleDateString()}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Address:</Typography>
+          <Typography>{selectedUser.address}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Previously Visited:</Typography>
+          <Typography>{selectedUser.previouslyVisited}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Extend Assistance:</Typography>
+          <Typography>{selectedUser.extendAssistance}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Document Ready:</Typography>
+          <Typography>{selectedUser.docReady}</Typography>
+        </div>
+
+        <div>
+          <Typography variant="h6">Terms Agreed:</Typography>
+          <Typography>{selectedUser.TandCAgree}</Typography>
+        </div>
+
+        {/* Add more fields as required */}
+      </div>
+    )}
+  </DialogBody>
+  <DialogFooter>
+    <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
+      Close
+    </Button>
+  </DialogFooter>
+</Dialog>
+
 
               <img
                 src={selectedUser.img}
@@ -463,6 +619,7 @@ const AdminDashboard = () => {
           </Button>
         </DialogFooter>
       </Dialog>
+
     </>
   );
 };
