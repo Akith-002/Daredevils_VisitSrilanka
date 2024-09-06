@@ -8,7 +8,6 @@ import { Router, BrowserRouter, Routes, Route } from "react-router-dom";
 import Carousel from "./Components/Carousel";
 import PlanYourTrip from "./Components/PlanYourTrip";
 
-
 import HomePage from "./Views/HomePage";
 import LoginPage from "./Views/Admin-login";
 
@@ -16,6 +15,7 @@ import AdminDashboard from "./Views/AdminDashboard";
 import VisaStatus from "./Views/VisaStatus";
 import EnterPassport from "./Views/EnterPassport";
 import SubmissionSuccess from "./Views/SubmissionSuccess";
+import VisaForm from "./Views/VisaForm";
 
 function App() {
   return (
@@ -30,11 +30,11 @@ function App() {
           <Route path="/Footer" Component={Footer} />
           <Route path="/admindashboard" Component={AdminDashboard} />
           <Route path="/visastatus" Component={VisaStatus} />
-          <Route path="/passportcheck" Component={EnterPassport}/>
-          <Route path="/submissionsuccess" Component={SubmissionSuccess}/>
+          <Route path="/passportcheck" Component={EnterPassport} />
+          <Route path="/submissionsuccess" Component={SubmissionSuccess} />{" "}
+          <Route path="/visaform" Component={VisaForm} />
         </Routes>
-        <div className="App">
-        </div>
+        <div className="App"></div>
       </BrowserRouter>
     </>
   );
