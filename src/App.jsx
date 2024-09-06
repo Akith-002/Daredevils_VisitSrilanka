@@ -17,21 +17,18 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-    <Route path="/" Component={HomePage} />
-          <Route path="/mapcomponent" Component={MapComponent}/>
+          <Route path="/" Component={HomePage} />
+          <Route path="/mapcomponent" Component={MapComponent} />
           <Route path="/visaapprovalmain" Component={VisaApprovalMain} />
           <Route path="/visaapplication" Component={VisaApplication} />
-
           <Route path="/Admin-login" Component={LoginPage} />
           <Route path="/Footer" Component={Footer} />
-
-          <Route path="/admindashboard" Component={AdminDashboard}/>
-          <Route path="/visastatus" Component={VisaStatus}/>
-
+          <Route path="/admindashboard" Component={AdminDashboard} />
+          <Route path="/visastatus" Component={VisaStatus} />
         </Routes>
       </BrowserRouter>
     </>
   );
 }
 
-export default App;
+export default App;
