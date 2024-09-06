@@ -25,7 +25,11 @@ const Navbar = () => {
             ].map((item, index) => (
               <li key={index}>
                 <a
-                  href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  href={
+                    item === "Visa Approval"
+                      ? "/visaapproval" // Directs to another page for Visa Approval
+                      : `#${item.toLowerCase().replace(/\s+/g, "-")}`
+                  }
                   className="text-white hover:underline hover:underline-offset-4 hover:text-white"
                 >
                   {item}
