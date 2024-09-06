@@ -182,7 +182,7 @@ const MapComponent = () => {
   };
 
   return (
-    <div style={{ margin: "1em" }} id="discover">
+    <div id="discover">
       <div style={{ display: "flex", justifyContent: "center" }}>
         <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
       </div>
