@@ -200,7 +200,7 @@ const MapComponent = () => {
             zoomAnimation={true}
             zoomAnimationThreshold={4}
             easeLinearity={0.25}
-            style={{ height: "100%" }}
+            style={{ height: "100%", zIndex:"0" }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
