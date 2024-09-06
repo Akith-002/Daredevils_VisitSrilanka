@@ -18,7 +18,7 @@ const PlanYourTrip = () => {
         <img 
           src="/images/planYourTrip.jpg" 
           alt="Traveler with a robot"
-          className="w-full max-w-xs h-64 rounded-lg object-cover"
+          className="w-full max-w-xs h-56 rounded-lg"
         />
       </div>
 
