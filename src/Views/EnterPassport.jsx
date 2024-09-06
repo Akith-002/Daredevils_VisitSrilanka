@@ -59,7 +59,7 @@ const EnterPassport = () => {
         applicantId: applicantId,
         adminApproveStatus: newStatus,
       };
-      const response = await axios.post('https://a818-112-134-213-205.ngrok-free.app/applicant', reqBody);
+      const response = await axios.put('https://a818-112-134-213-205.ngrok-free.app/applicant', reqBody);
       return response.data; // Handle the response as needed
     } catch (error) {
       console.error("Error updating status:", error);
