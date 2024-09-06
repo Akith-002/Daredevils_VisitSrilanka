@@ -20,7 +20,7 @@ const Navbar = () => {
     };
   }, []);
   return (
-    <nav className={`fixed top-0 w-full z-10 ${navbarColor}`}>
+    <nav className={`fixed top-0 w-full z-40 ${navbarColor}`}>
       <div className="bg-transparent backdrop-filter backdrop-blur-lg bg-opacity-10">
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
           <div>
