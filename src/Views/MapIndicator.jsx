@@ -183,8 +183,15 @@ const MapComponent = () => {
 
   return (
     <div style={{ margin: "1em" }} id="discover">
-      <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
-      <div style={{ display: "flex", height: "90vh", padding: "4em" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
+      </div>
+      <p className="animated-paragraph">
+        Explore the rich history, diverse landscapes, and cultural heritage of Sri Lanka 
+        through its most iconic locations. Click on any marker to uncover more details 
+        about each destination and embark on a virtual journey across the island!
+      </p>
+      <div style={{ display: "flex", height: "90vh", padding: "2em"}}  id="MapCardContainer">
         {/* Map Section */}
         <div className="map-box">
           <MapContainer
