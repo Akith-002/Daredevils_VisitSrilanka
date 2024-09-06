@@ -6,7 +6,6 @@ import image1 from "../assets/images/carousel/image1.png";
 import image2 from "../assets/images/carousel/image2.png";
 import image3 from "../assets/images/carousel/image3.png";
 import image4 from "../assets/images/carousel/image4.png";
-import { Link } from "react-router-dom";
 
 function VisaApprovalMain() {
   return (
