@@ -13,7 +13,7 @@ const HomePage = () => {
       <Navbar />
       <Carousel />
       <DescriptionSection />
-      <ScrollCards/>
+      <ScrollCards />
       <MapIndicator />
       <PlanYourTrip />
       <Footer />
