@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom"; // Keep this for other internal navigation
 
 const Navbar = () => {
+  const [navbarColor, setNavbarColor] = useState("bg-none");
+
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setNavbarColor("bg-gradient-to-r from-blue-3 to-blue-4"); // Apply gradient on scroll
+    } else {
+      setNavbarColor("bg-none"); // Transparent at the top
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="fixed top-0 w-full z-10">
-      <div className="bg-transparent backdrop-filter backdrop-blur-lg bg-opacity-10">
+    <nav
+      className={`fixed top-0 w-full z-40 transition-colors duration-300 ${navbarColor}`}
+    >
+      <div className="backdrop-filter backdrop-blur-lg bg-opacity-10">
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
           <div>
             <img
@@ -60,7 +79,7 @@ const Navbar = () => {
                 <Link
                   to={
                     item === "Visa Approval"
-                      ? "/visaapproval" // Directs to another page for Visa Approval
+                      ? "/visaapproval"
                       : `#${item.toLowerCase().replace(/\s+/g, "-")}`
                   }
                   className="text-white hover:underline hover:underline-offset-4 hover:text-white"

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 // Importing images
@@ -17,7 +18,7 @@ const Carousel = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000); // 3 seconds interval
+    }, 4500); // 3 seconds interval
 
     return () => {
       clearInterval(interval); // Clean up the interval on component unmount
@@ -26,15 +27,17 @@ const Carousel = () => {
 
   return (
     <div className="relative overflow-hidden w-full h-[800px]">
-      {/* Text Overlay */}
+      {/* Text Overlay with sliding animation */}
       <div className="absolute top-1/2 bottom-0 left-32 w-full h-full flex z-10">
-        <div className="text-white text-left bg-white bg-opacity-0 p-4 rounded">
-          <h1 className="text-7xl font-bold mb-4 text-stroke-[3px] text-stroke-blue-1 ">
+
+        <div className="text-white text-left bg-white bg-opacity-0 p-4 rounded animate-slide-in">
+          <h1 className="text-7xl font-bold mb-4">
+
             Best Choice <br></br>To Explore
           </h1>
 
           <button className="mt-4 bg-white text-[#01385F] py-2 px-4 rounded-lg hover:bg-[#01385F] hover:text-white text-lg shadow-lg transition ">
-            Start Planning
+            Start Planningt
           </button>
         </div>
       </div>
@@ -55,6 +58,7 @@ const Carousel = () => {
             className="w-full h-full object-cover flex-shrink-0"
             style={{ width: `${100 / images.length}%` }}
           />
+
         ))}
       </div>
     </div>
