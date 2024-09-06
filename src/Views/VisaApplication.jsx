@@ -7,7 +7,7 @@ import axios from "axios";
 import PersonalInfo from "../Components/PersonalInfo";
 import PassportInfo from "../Components/PassportInfo";
 import VisaRequestInfo from "../Components/VisaRequestInfo";
-// import toast from "react-hot-toast"; // Assuming you are using toast notifications
+import ApplicationImages from "../Components/ApplicationImages";
 
 // Validation schema
 const validationSchema = yup.object({
@@ -47,16 +47,16 @@ const validationSchema = yup.object({
 
 function VisaApplication() {
   const [step, setStep] = useState(1); // Track which section is currently active
-  const [idCardPhoto, setIdCardPhoto] = useState(null);
-  const [personalPhoto, setPersonalPhoto] = useState(null);
+  const [passImage, setpassImage] = useState(null);
+  const [passBio, setpassBio] = useState(null);
 
   const handleFileChange = (e, setFieldValue, fieldName) => {
     const file = e.target.files[0];
     setFieldValue(fieldName, file);
-    if (fieldName === "idCardPhoto") {
-      setIdCardPhoto(file);
-    } else if (fieldName === "personalPhoto") {
-      setPersonalPhoto(file);
+    if (fieldName === "passBio") {
+      setpassBio(file);
+    } else if (fieldName === "passImage") {
+      setpassImage(file);
     }
   };
 
@@ -112,8 +112,15 @@ function VisaApplication() {
     },
   });
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    formik;
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    setFieldValue,
+  } = formik;
 
   const handleNext = () => {
     setStep(step + 1);
@@ -175,67 +182,14 @@ function VisaApplication() {
           )}
 
           {step === 4 && (
-            <>
-              <div className="h-4/5">
-                <h2>Section 4: Images</h2>
-                <div>
-                  <label
-                    htmlFor="personalPhoto"
-                    className="block text-sm font-medium text-gray-900"
-                  >
-                    Personal Image
-                  </label>
-                  <input
-                    type="file"
-                    name="passBio"
-                    id="idCardPhoto"
-                    onBlur={handleBlur}
-                    className="mt-1 block w-full text-sm text-gray-500"
-                    onChange={(e) =>
-                      handleFileChange(e, setFieldValue, "idCardPhoto")
-                    }
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="scanPassport"
-                    className="block text-sm font-medium text-gray-900"
-                  >
-                    Scanned copy of Passport
-                  </label>
-                  <input
-                    type="file"
-                    name="passImage"
-                    id="scanPassport"
-                    onBlur={handleBlur}
-                    className="mt-1 block w-full text-sm text-gray-500"
-                    onChange={(e) =>
-                      handleFileChange(e, setFieldValue, "scanPassport")
-                    }
-                    required
-                  />
-                </div>
-
-                {/* Previous and Next buttons */}
-                <div className="flex justify-between mt-4">
-                  <button
-                    type="button"
-                    onClick={handlePrevious}
-                    className="bg-gray-400 text-white px-4 py-2 rounded-md"
-                  >
-                    Previous
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleSubmit}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </>
+            <ApplicationImages
+              values={values}
+              handleBlur={handleBlur}
+              handleFileChange={handleFileChange}
+              handlePrevious={handlePrevious}
+              handleSubmit={handleSubmit}
+              setFieldValue={setFieldValue}
+            />
           )}
         </form>
       </section>
