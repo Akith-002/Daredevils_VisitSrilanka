@@ -182,7 +182,7 @@ const MapComponent = () => {
   };
 
   return (
-    <div style={{ margin: "1em" }} id="discover">
+    <div id="discover">
       <div style={{ display: "flex", justifyContent: "center" }}>
         <h1 className="MapIndicatorHeader text-5xl font-bold">Discover</h1>
       </div>
@@ -200,7 +200,7 @@ const MapComponent = () => {
             zoomAnimation={true}
             zoomAnimationThreshold={4}
             easeLinearity={0.25}
-            style={{ height: "100%" }}
+            style={{ height: "100%", zIndex:"0" }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
