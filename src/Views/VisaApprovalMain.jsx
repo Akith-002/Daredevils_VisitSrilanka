@@ -23,21 +23,20 @@ function VisaApprovalMain() {
             <a href="/visaapplication">
               <Button
                 size="lg"
-                color="green"
-                variant="gradient"
-                className="shadow-lg"
+                className="shadow-lg bg-green-1"
               >
                 Apply for visa
               </Button>
             </a>
-            <Button
-              size="lg"
-              color="light-green"
-              variant="gradient"
-              className="shadow-lg"
-            >
-              Check your visa status
-            </Button>
+            <a href="/passportcheck">
+              {" "}
+              <Button
+                size="lg"
+                className="shadow-lg bg-green-2"
+              >
+                Check your visa status
+              </Button>
+            </a>
           </div>
         </div>
         <Carousel

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ApplicationImages = ({
   values,
@@ -8,6 +8,34 @@ const ApplicationImages = ({
   handleSubmit,
   setFieldValue,
 }) => {
+  // Load existing data from localStorage on mount
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("applicationImages")) || {};
+    for (const key in savedData) {
+      if (savedData.hasOwnProperty(key)) {
+        setFieldValue(key, savedData[key]);
+      }
+    }
+  }, [setFieldValue]);
+
+  // Save data to localStorage whenever values change
+  useEffect(() => {
+    const saveDataToLocalStorage = () => {
+      localStorage.setItem("applicationImages", JSON.stringify(values));
+    };
+
+    saveDataToLocalStorage();
+  }, [values]);
+
+  // Custom submit handler to log form data and perform form submission
+  const handleFormSubmit = () => {
+    // Log the form data to the console
+    console.log("Form Data:", values);
+
+    // Perform the actual submit action (e.g., API call, navigation)
+    handleSubmit();
+  };
+
   return (
     <div className="h-4/5">
       <h2 className="text-xl font-semibold mb-4">Section 4: Images</h2>
@@ -60,7 +88,7 @@ const ApplicationImages = ({
         </button>
         <button
           type="button"
-          onClick={handleSubmit}
+          onClick={handleFormSubmit}
           className="bg-blue-600 text-white px-4 py-2 rounded-md"
         >
           Submit
