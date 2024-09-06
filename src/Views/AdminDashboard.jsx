@@ -35,186 +35,6 @@ const TABLE_HEAD = [
 
 const TABLE_ROWS = [
   {
-
-    img: "https://randomuser.me/api/portraits/men/1.jpg",
-    passportNumber: "M1234567",
-    name: "John Doe",
-    country: "United States",
-    visaType: "Tourist",
-    visaStatus: "Approved",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/2.jpg",
-    passportNumber: "A9876543",
-    name: "Jane Smith",
-    country: "Canada",
-    visaType: "Work",
-    visaStatus: "Pending",
-    interpolClearance: "Under Review",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/3.jpg",
-    passportNumber: "K3344556",
-    name: "David Brown",
-    country: "United Kingdom",
-    visaType: "Student",
-    visaStatus: "Denied",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/4.jpg",
-    passportNumber: "S1122334",
-    name: "Emily Johnson",
-    country: "Australia",
-    visaType: "Business",
-    visaStatus: "Approved",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/5.jpg",
-    passportNumber: "Z5566778",
-    name: "Chris Evans",
-    country: "New Zealand",
-    visaType: "Tourist",
-    visaStatus: "Pending",
-    interpolClearance: "Denied",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/6.jpg",
-    passportNumber: "C1234567",
-    name: "Anna Lee",
-    country: "Germany",
-    visaType: "Student",
-    visaStatus: "Approved",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/7.jpg",
-    passportNumber: "B7654321",
-    name: "Michael Green",
-    country: "France",
-    visaType: "Work",
-    visaStatus: "Denied",
-    interpolClearance: "Under Review",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/8.jpg",
-    passportNumber: "D2345678",
-    name: "Sophia Wilson",
-    country: "Italy",
-    visaType: "Business",
-    visaStatus: "Pending",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/9.jpg",
-    passportNumber: "E3456789",
-    name: "James Anderson",
-    country: "Japan",
-    visaType: "Tourist",
-    visaStatus: "Approved",
-    interpolClearance: "Denied",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/10.jpg",
-    passportNumber: "F4567890",
-    name: "Olivia Taylor",
-    country: "South Korea",
-    visaType: "Student",
-    visaStatus: "Pending",
-    interpolClearance: "Under Review",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/11.jpg",
-    passportNumber: "G5678901",
-    name: "Liam Harris",
-    country: "Brazil",
-    visaType: "Work",
-    visaStatus: "Approved",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/12.jpg",
-    passportNumber: "H6789012",
-    name: "Emma Davis",
-    country: "Argentina",
-    visaType: "Business",
-    visaStatus: "Denied",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/13.jpg",
-    passportNumber: "I7890123",
-    name: "Oliver Martinez",
-    country: "Mexico",
-    visaType: "Tourist",
-    visaStatus: "Pending",
-    interpolClearance: "Denied",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/14.jpg",
-    passportNumber: "J8901234",
-    name: "Ava Robinson",
-    country: "Chile",
-    visaType: "Student",
-    visaStatus: "Approved",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/15.jpg",
-    passportNumber: "K9012345",
-    name: "Ethan Clark",
-    country: "Colombia",
-    visaType: "Work",
-    visaStatus: "Under Review",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/16.jpg",
-    passportNumber: "L0123456",
-    name: "Mia Lewis",
-    country: "Peru",
-    visaType: "Business",
-    visaStatus: "Denied",
-    interpolClearance: "Under Review",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/17.jpg",
-    passportNumber: "M1234568",
-    name: "Alexander Young",
-    country: "South Africa",
-    visaType: "Tourist",
-    visaStatus: "Approved",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/18.jpg",
-    passportNumber: "N2345679",
-    name: "Isabella Walker",
-    country: "Nigeria",
-    visaType: "Student",
-    visaStatus: "Pending",
-    interpolClearance: "Denied",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/men/19.jpg",
-    passportNumber: "O3456780",
-    name: "Daniel King",
-    country: "India",
-    visaType: "Work",
-    visaStatus: "Approved",
-    interpolClearance: "Cleared",
-  },
-  {
-    img: "https://randomuser.me/api/portraits/women/20.jpg",
-    passportNumber: "P4567891",
-    name: "Charlotte Scott",
-    country: "Pakistan",
-    visaType: "Business",
-    visaStatus: "Denied",
-    interpolClearance: "Cleared",
-=======
     applicantId: 4,
     honorifics: "Mr.",
     name: "Baragama Arachchige Akith Chandinu",
@@ -254,9 +74,6 @@ const TABLE_ROWS = [
     phoneNo: 767221011,
     email: "akith.chandinu@gmail.com",
     passNo: "n1232431",
-    
-    
-    
     passCountry: "Sri Lanka",
     dateOfExpiry: "2025-01-06T00:00:00.000Z",
     dateOfIssue: "2024-01-01T00:00:00.000Z",
@@ -278,7 +95,6 @@ const TABLE_ROWS = [
     approveEmailSentStatus: null,
     createdAt: "2024-09-06T17:00:37.000Z",
     updatedAt: "2024-09-06T17:00:37.000Z",
-
   },
 ];
 
@@ -297,6 +113,22 @@ const AdminDashboard = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+  const [selectedStatus, setSelectedStatus] = useState(
+    selectedUser?.adminApproveStatus || "Under Review"
+  ); // Default status
+
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  const handleSaveStatus = () => {
+    // Logic to save the new status (e.g., update the user data)
+    console.log("New Status:", selectedStatus);
+    // You can make an API call or update your data here
+
+    // Close the dialog after saving
+    setOpenDialog(false);
+  };
 
   const totalPages = Math.ceil(TABLE_ROWS.length / ROWS_PER_PAGE);
   const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
@@ -307,13 +139,8 @@ const AdminDashboard = () => {
     <>
       <Card className="h-full w-full">
         <CardHeader floated={false} shadow={false} className="rounded-none">
-
-          <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
+        <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
             <span className="font-bold">Admin panel</span>
-
-          <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-            Admin panel
-
           </div>
         </CardHeader>
 
@@ -430,8 +257,7 @@ const AdminDashboard = () => {
                             color={
                               interPolCheck === "Cleared"
                                 ? "green"
-                                : interPolCheck
-                                 === "Under Review"
+                                : interPolCheck === "Under Review"
                                 ? "amber"
                                 : "red"
                             }
@@ -445,23 +271,16 @@ const AdminDashboard = () => {
                           className="text-blue-500"
                           onClick={() =>
                             handleOpenDialog({
-
-                              img,
-                              passportNumber,
-                              name,
-                              country,
-                              visaType,
-                              visaStatus,
-                              interpolClearance,
-
                               passImage,
+                              passNo,
+                              name,
+                              visaType,
                               passNo,
                               name,
                               passCountry,
                               visaType,
                               adminApproveStatus,
                               interPolCheck,
-
                             })
                           }
                         >
@@ -508,101 +327,89 @@ const AdminDashboard = () => {
       </Card>
 
       {/* Dialog for displaying user details */}
-     {/* Dialog for displaying user details */}
-<Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
-  <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
-  <DialogBody className="overflow-scroll">
-    {selectedUser && (
-      <div className="grid grid-cols-2 gap-4">
-        {/* Displaying Passport Image */}
-        <div className="col-span-2 flex justify-center">
-          <img
-            src={selectedUser.passImage}
-            alt={selectedUser.name}
-            className="w-32 h-32 rounded-full mt-4"
-          />
-        </div>
-
-        {/* Displaying each value in a neat grid */}
-        <div>
-          <Typography variant="h6">Passport Number:</Typography>
-          <Typography>{selectedUser.passNo}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Country of Passport:</Typography>
-          <Typography>{selectedUser.passCountry}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Visa Type:</Typography>
-          <Typography>{selectedUser.visaType}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Visa Status:</Typography>
-          <Typography>{selectedUser.adminApproveStatus}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Interpol Clearance:</Typography>
-          <Typography>{selectedUser.interPolCheck}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Email:</Typography>
-          <Typography>{selectedUser.email}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Phone Number:</Typography>
-          <Typography>{selectedUser.phoneNo}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Date of Birth:</Typography>
-          <Typography>{new Date(selectedUser.dateOfBirth).toLocaleDateString()}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Address:</Typography>
-          <Typography>{selectedUser.address}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Previously Visited:</Typography>
-          <Typography>{selectedUser.previouslyVisited}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Extend Assistance:</Typography>
-          <Typography>{selectedUser.extendAssistance}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Document Ready:</Typography>
-          <Typography>{selectedUser.docReady}</Typography>
-        </div>
-
-        <div>
-          <Typography variant="h6">Terms Agreed:</Typography>
-          <Typography>{selectedUser.TandCAgree}</Typography>
-        </div>
-
-        {/* Add more fields as required */}
-      </div>
-    )}
-  </DialogBody>
-  <DialogFooter>
-    <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
-      Close
-    </Button>
-  </DialogFooter>
-</Dialog>
-
-
+      {/* Dialog for displaying user details */}
+      <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
+        <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
+        <DialogBody className="overflow-y-auto max-h-96">
+          {selectedUser && (
+            <div className="grid grid-cols-2 gap-4">
+              {/* Displaying Passport Image */}
+              <div className="col-span-2 flex justify-center">
+                <img
+                  src={selectedUser.passImage}
+                  alt={selectedUser.name}
+                  className="w-32 h-32 rounded-full mt-4"
+                />
+              </div>
+              {/* Displaying each value in a neat grid */}
+              <div>
+                <Typography variant="h6">Passport Number:</Typography>
+                <Typography>{selectedUser.passNo}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Country of Passport:</Typography>
+                <Typography>{selectedUser.passCountry}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Visa Type:</Typography>
+                <Typography>{selectedUser.visaType}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Visa Status:</Typography>
+                <Typography>{selectedUser.adminApproveStatus}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Interpol Clearance:</Typography>
+                <Typography>{selectedUser.interPolCheck}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Email:</Typography>
+                <Typography>{selectedUser.email}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Phone Number:</Typography>
+                <Typography>{selectedUser.phoneNo}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Date of Birth:</Typography>
+                <Typography>
+                  {new Date(selectedUser.dateOfBirth).toLocaleDateString()}
+                </Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Address:</Typography>
+                <Typography>{selectedUser.address}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Previously Visited:</Typography>
+                <Typography>{selectedUser.previouslyVisited}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Extend Assistance:</Typography>
+                <Typography>{selectedUser.extendAssistance}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Document Ready:</Typography>
+                <Typography>{selectedUser.docReady}</Typography>
+              </div>
+              <div>
+                <Typography variant="h6">Terms Agreed:</Typography>
+                <Typography>{selectedUser.TandCAgree}</Typography>
+              </div>
+              <div className="col-span-1">
+                <Typography variant="h6">Change Visa Status:</Typography>
+                <select
+                  value={selectedStatus}
+                  onChange={handleStatusChange}
+                  className="border border-gray-300 rounded px-2 py-1 w-full"
+                >
+                  <option value="Approved">Approved</option>
+                  <option value="Under Review">Under Review</option>
+                  <option value="Reject">Reject</option>
+                </select>
+              </div>{" "}
               <img
-                src={selectedUser.img}
+                src={selectedUser.passImage}
                 alt={selectedUser.name}
                 className="w-32 h-32 rounded-full mt-4"
               />
@@ -617,9 +424,11 @@ const AdminDashboard = () => {
           >
             Close
           </Button>
+          <Button variant="text" color="green" onClick={handleSaveStatus}>
+            Save Status
+          </Button>
         </DialogFooter>
       </Dialog>
-
     </>
   );
 };
