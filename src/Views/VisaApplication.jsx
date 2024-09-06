@@ -133,7 +133,7 @@ function VisaApplication() {
   // when cancel button is clicked redirect to home page
   const handleCancel = () => {
     setStep(1);
-    window.location.href = "/visaApprovalMain";
+    window.location.href = "/visaapproval";
   };
 
   return (
