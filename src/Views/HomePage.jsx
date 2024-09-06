@@ -12,8 +12,8 @@ const HomePage = () => {
     <div>
       <Navbar />
       <Carousel />
-      <ScrollCards />
       <DescriptionSection />
+      <ScrollCards/>
       <MapIndicator />
       <PlanYourTrip />
       <Footer />
