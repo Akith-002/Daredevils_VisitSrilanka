@@ -48,7 +48,9 @@ const AdminDashboard = () => {
     const fetchApplicantData = async () => {
       try {
         const data = await getApplicantDetails(); // Fetch data from API
-        setApplicants(data); // Update state with fetched data
+        // Filter out the applicant with ID 9900954
+        const filteredData = data.filter(applicant => applicant.passNo !== "99009054");
+        setApplicants(filteredData); // Update state with fetched data
         setLoading(false); // Stop loading
       } catch (error) {
         console.error("Error fetching applicants:", error);
