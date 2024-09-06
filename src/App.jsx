@@ -32,7 +32,7 @@ function App() {
           <Route path="/passportcheck" Component={EnterPassport} />
           <Route path="/submissionsuccess" Component={SubmissionSuccess} />{" "}
         </Routes>
-        <div className="App"></div>
+        {/* <div className="App"></div> */}
       </BrowserRouter>
     </>
   );
