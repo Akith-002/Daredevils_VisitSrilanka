@@ -74,9 +74,6 @@ const TABLE_ROWS = [
     phoneNo: 767221011,
     email: "akith.chandinu@gmail.com",
     passNo: "n1232431",
-    
-    
-    
     passCountry: "Sri Lanka",
     dateOfExpiry: "2025-01-06T00:00:00.000Z",
     dateOfIssue: "2024-01-01T00:00:00.000Z",
@@ -98,6 +95,7 @@ const TABLE_ROWS = [
     approveEmailSentStatus: null,
     createdAt: "2024-09-06T17:00:37.000Z",
     updatedAt: "2024-09-06T17:00:37.000Z",
+
   },
 ];
 
@@ -116,6 +114,20 @@ const AdminDashboard = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+  const [selectedStatus, setSelectedStatus] = useState(selectedUser?.adminApproveStatus || "Under Review"); // Default status
+
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  const handleSaveStatus = () => {
+    // Logic to save the new status (e.g., update the user data)
+    console.log("New Status:", selectedStatus);
+    // You can make an API call or update your data here
+
+    // Close the dialog after saving
+    setOpenDialog(false);
+  };
 
   const totalPages = Math.ceil(TABLE_ROWS.length / ROWS_PER_PAGE);
   const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
@@ -126,8 +138,12 @@ const AdminDashboard = () => {
     <>
       <Card className="h-full w-full">
         <CardHeader floated={false} shadow={false} className="rounded-none">
+
+        
+
           <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
             Admin panel
+
           </div>
         </CardHeader>
 
@@ -259,13 +275,18 @@ const AdminDashboard = () => {
                           className="text-blue-500"
                           onClick={() =>
                             handleOpenDialog({
+
                               passImage,
+                              passNo,
+                              name,
+                              visaType,
                               passNo,
                               name,
                               passCountry,
                               visaType,
                               adminApproveStatus,
                               interPolCheck,
+
                             })
                           }
                         >
@@ -315,8 +336,8 @@ const AdminDashboard = () => {
      {/* Dialog for displaying user details */}
 <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
   <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
-  <DialogBody className="overflow-scroll">
-    {selectedUser && (
+  <DialogBody className="overflow-y-auto max-h-96">
+        {selectedUser && (
       <div className="grid grid-cols-2 gap-4">
         {/* Displaying Passport Image */}
         <div className="col-span-2 flex justify-center">
@@ -393,16 +414,40 @@ const AdminDashboard = () => {
           <Typography>{selectedUser.TandCAgree}</Typography>
         </div>
 
-        {/* Add more fields as required */}
+        <div className="col-span-1">
+              <Typography variant="h6">Change Visa Status:</Typography>
+              <select
+                value={selectedStatus}
+                onChange={handleStatusChange}
+                className="border border-gray-300 rounded px-2 py-1 w-full"
+              >
+                <option value="Approved">Approved</option>
+                <option value="Under Review">Under Review</option>
+                <option value="Reject">Reject</option>
+              </select>
+            </div>  <img
+                src={selectedUser.passImage}
+                alt={selectedUser.name}
+                className="w-32 h-32 rounded-full mt-4"
+              />
       </div>
     )}
   </DialogBody>
   <DialogFooter>
-    <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
-      Close
-    </Button>
-  </DialogFooter>
+        <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
+          Close
+        </Button>
+        <Button variant="text" color="green" onClick={handleSaveStatus}>
+          Save Status
+        </Button>
+      </DialogFooter>
 </Dialog>
+
+
+            
+            
+          
+  
 
     </>
   );
