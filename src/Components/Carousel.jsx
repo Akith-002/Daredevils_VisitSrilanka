@@ -37,7 +37,7 @@ const Carousel = () => {
           </h1>
 
           <button className="mt-4 bg-white text-[#01385F] py-2 px-4 rounded-lg hover:bg-[#01385F] hover:text-white text-lg shadow-lg transition ">
-            Start Planning
+            Start Planningt
           </button>
         </div>
       </div>
