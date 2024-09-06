@@ -32,8 +32,8 @@ const PlanYourTrip = () => {
         </p>
 
         {/* Button */}
-        <button className="bg-teal-900 text-white w-56 py-3 shadow-lg shadow-teal-500/50 hover:bg-green-700 focus:outline-none rounded-lg">
-          Start Planning
+        <button className="bg-teal-900 text-white w-56 py-3 shadow-lg shadow-teal-500/50 hover:bg-green-700 focus:outline-none rounded-lg"><a href='chatView'>
+          Start Planning</a>
         </button>
       </div>
     </div>

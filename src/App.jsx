@@ -13,6 +13,7 @@ import AdminDashboard from "./Views/AdminDashboard";
 import VisaStatus from "./Views/VisaStatus";
 import EnterPassport from "./Views/EnterPassport";
 import SubmissionSuccess from "./Views/SubmissionSuccess";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
   
   
