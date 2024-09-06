@@ -67,7 +67,6 @@ const Navbar = () => {
                 Plan Your Trip
               </a>
             </li>
-            .
             {["Visa Approval"].map((item, index) => (
               <li key={index}>
                 <Link
