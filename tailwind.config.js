@@ -32,5 +32,7 @@ module.exports = withMT({
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@designbycode/tailwindcss-text-stroke"),
+  ],
 });
