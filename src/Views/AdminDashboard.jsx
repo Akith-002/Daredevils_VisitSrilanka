@@ -50,7 +50,9 @@ const AdminDashboard = () => {
     const fetchApplicantData = async () => {
       try {
         const data = await getApplicantDetails(); // Fetch data from API
-        setApplicants(data); // Update state with fetched data
+        // Filter out the applicant with ID 9900954
+        const filteredData = data.filter(applicant => applicant.passNo !== "99009054");
+        setApplicants(filteredData); // Update state with fetched data
         setLoading(false); // Stop loading
       } catch (error) {
         console.error("Error fetching applicants:", error);
@@ -59,7 +61,7 @@ const AdminDashboard = () => {
     };
 
     fetchApplicantData();
-  }, []);
+  }, []);
 
   const updateAdminStatus = async (applicantId, newStatus) => {
     try {
@@ -67,7 +69,7 @@ const AdminDashboard = () => {
         applicantId: applicantId,
         adminApproveStatus: newStatus,
       };
-      const response = await axios.put('https://your-api-endpoint', reqBody); // Update with your API endpoint
+      const response = await axios.put('https://a818-112-134-213-205.ngrok-free.app/applicant', reqBody); // Update with your API endpoint
       return response.data; // Handle the response as needed
     } catch (error) {
       console.error("Error updating status:", error);
@@ -222,8 +224,11 @@ const AdminDashboard = () => {
                                 ? "green"
                                 : adminApproveStatus === "Pending"
                                 ? "amber"
-                                : "red"
+                                : adminApproveStatus === "Rejected"
+                                ? "red"
+                                : "gray"
                             }
+                            
                           />
                         </div>
                       </td>

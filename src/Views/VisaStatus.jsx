@@ -38,12 +38,12 @@ const VisaStatus = () => {
     },
     step2: {
       title: "In review/processing",
-      status: adminApproveStatus || "Pending",
-      color: adminApproveStatus === "Completed" ? "green" : "gray",
+      status: "Completed",
+      color: "green" ,
     },
     step3: {
-      title: "Approved",
-      status: adminApproveStatus || "Pending",
+      title: "Approve Status",
+      status:"Rejected",
       color: adminApproveStatus === "Completed" ? "green" : adminApproveStatus === "Rejected" ? "red" : "gray",
     },
     step4: {
