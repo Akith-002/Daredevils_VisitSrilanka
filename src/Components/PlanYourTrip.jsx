@@ -12,7 +12,7 @@ const PlanYourTrip = () => {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-around bg-white rounded-lg shadow-lg p-6 md:p-12">
+    <div id="planyourtrip" className="flex flex-col md:flex-row items-center justify-around bg-white rounded-lg shadow-lg p-6 md:p-24">
       {/* Image Section */}
       <div className="flex justify-center md:w-2/5 mb-6 md:mb-0 ">
         <img 
@@ -32,7 +32,7 @@ const PlanYourTrip = () => {
         </p>
 
         {/* Button */}
-        <button className="bg-teal-900 text-white w-56 py-3 shadow-lg shadow-teal-500/50 hover:bg-green-700 focus:outline-none rounded-lg">
+        <button className="bg-teal-900 text-white w-56 py-3 shadow-lg shadow-teal-500/50 hover:bg-green-700 focus:outline-none rounded-lg" onClick={ ()=> window.location.href = '/chatView'}>
           Start Planning
         </button>
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavbarType2 from "../Components/NavbarType2";
 import { ArrowCircleLeft, ArrowRight } from "@phosphor-icons/react";
 import {
@@ -20,24 +21,30 @@ import {
 
 const VisaStatus = () => {
   const [open, setOpen] = React.useState(false); // State to control dialog visibility
-
   const handleOpen = () => setOpen(!open); // Toggle the dialog
 
+  const location = useLocation(); // To access state from the previous page
+  const navigate = useNavigate();
+
+  // Extracting statuses from location state
+  const {  adminApproveStatus} = location.state || {};
+
+  // Example steps, modify according to actual data
   const steps = {
     step1: {
       title: "Application Submitted",
       status: "Completed",
-      color: "green",
+      color:  "green" ,
     },
     step2: {
       title: "In review/processing",
-      status: "Completed",
-      color: "green",
+      status: adminApproveStatus || "Pending",
+      color: adminApproveStatus === "Completed" ? "green" : "gray",
     },
     step3: {
       title: "Approved",
-      status: "Rejected",
-      color: "red",
+      status: adminApproveStatus || "Pending",
+      color: adminApproveStatus === "Completed" ? "green" : adminApproveStatus === "Rejected" ? "red" : "gray",
     },
     step4: {
       title: "Issued",

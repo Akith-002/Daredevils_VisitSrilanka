@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getApplicantDetails } from "../Request/Admin.js"; // Import the API request function
+import axios from "axios"; // Ensure axios is imported
+
 import { PencilIcon } from "@heroicons/react/24/solid";
 import {
   ArrowDownTrayIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
+import NavbarType2 from "../Components/NavbarType2";
 import {
   Card,
   CardHeader,
@@ -26,243 +30,101 @@ const TABLE_HEAD = [
   "Image",
   "Passport number",
   "Name",
-  "Country",
+  "passCountry",
   "Visa Type",
   "Visa Status",
   "Interpol Clearance",
   "",
 ];
 
-const TABLE_ROWS = [
-    
-    {
-      "img": "https://randomuser.me/api/portraits/men/1.jpg",
-      "passportNumber": "M1234567",
-      "name": "John Doe",
-      "country": "United States",
-      "visaType": "Tourist",
-      "visaStatus": "Approved",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/2.jpg",
-      "passportNumber": "A9876543",
-      "name": "Jane Smith",
-      "country": "Canada",
-      "visaType": "Work",
-      "visaStatus": "Pending",
-      "interpolClearance": "Under Review"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/3.jpg",
-      "passportNumber": "K3344556",
-      "name": "David Brown",
-      "country": "United Kingdom",
-      "visaType": "Student",
-      "visaStatus": "Denied",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/4.jpg",
-      "passportNumber": "S1122334",
-      "name": "Emily Johnson",
-      "country": "Australia",
-      "visaType": "Business",
-      "visaStatus": "Approved",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/5.jpg",
-      "passportNumber": "Z5566778",
-      "name": "Chris Evans",
-      "country": "New Zealand",
-      "visaType": "Tourist",
-      "visaStatus": "Pending",
-      "interpolClearance": "Denied"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/6.jpg",
-      "passportNumber": "C1234567",
-      "name": "Anna Lee",
-      "country": "Germany",
-      "visaType": "Student",
-      "visaStatus": "Approved",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/7.jpg",
-      "passportNumber": "B7654321",
-      "name": "Michael Green",
-      "country": "France",
-      "visaType": "Work",
-      "visaStatus": "Denied",
-      "interpolClearance": "Under Review"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/8.jpg",
-      "passportNumber": "D2345678",
-      "name": "Sophia Wilson",
-      "country": "Italy",
-      "visaType": "Business",
-      "visaStatus": "Pending",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/9.jpg",
-      "passportNumber": "E3456789",
-      "name": "James Anderson",
-      "country": "Japan",
-      "visaType": "Tourist",
-      "visaStatus": "Approved",
-      "interpolClearance": "Denied"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/10.jpg",
-      "passportNumber": "F4567890",
-      "name": "Olivia Taylor",
-      "country": "South Korea",
-      "visaType": "Student",
-      "visaStatus": "Pending",
-      "interpolClearance": "Under Review"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/11.jpg",
-      "passportNumber": "G5678901",
-      "name": "Liam Harris",
-      "country": "Brazil",
-      "visaType": "Work",
-      "visaStatus": "Approved",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/12.jpg",
-      "passportNumber": "H6789012",
-      "name": "Emma Davis",
-      "country": "Argentina",
-      "visaType": "Business",
-      "visaStatus": "Denied",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/13.jpg",
-      "passportNumber": "I7890123",
-      "name": "Oliver Martinez",
-      "country": "Mexico",
-      "visaType": "Tourist",
-      "visaStatus": "Pending",
-      "interpolClearance": "Denied"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/14.jpg",
-      "passportNumber": "J8901234",
-      "name": "Ava Robinson",
-      "country": "Chile",
-      "visaType": "Student",
-      "visaStatus": "Approved",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/15.jpg",
-      "passportNumber": "K9012345",
-      "name": "Ethan Clark",
-      "country": "Colombia",
-      "visaType": "Work",
-      "visaStatus": "Under Review",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/16.jpg",
-      "passportNumber": "L0123456",
-      "name": "Mia Lewis",
-      "country": "Peru",
-      "visaType": "Business",
-      "visaStatus": "Denied",
-      "interpolClearance": "Under Review"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/17.jpg",
-      "passportNumber": "M1234568",
-      "name": "Alexander Young",
-      "country": "South Africa",
-      "visaType": "Tourist",
-      "visaStatus": "Approved",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/18.jpg",
-      "passportNumber": "N2345679",
-      "name": "Isabella Walker",
-      "country": "Nigeria",
-      "visaType": "Student",
-      "visaStatus": "Pending",
-      "interpolClearance": "Denied"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/men/19.jpg",
-      "passportNumber": "O3456780",
-      "name": "Daniel King",
-      "country": "India",
-      "visaType": "Work",
-      "visaStatus": "Approved",
-      "interpolClearance": "Cleared"
-    },
-    {
-      "img": "https://randomuser.me/api/portraits/women/20.jpg",
-      "passportNumber": "P4567891",
-      "name": "Charlotte Scott",
-      "country": "Pakistan",
-      "visaType": "Business",
-      "visaStatus": "Denied",
-      "interpolClearance": "Cleared"
-    }
-        
-];
 const ROWS_PER_PAGE = 5; // Number of rows to display per page
 
 const AdminDashboard = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [applicants, setApplicants] = useState([]); // State to hold fetched data
+  const [loading, setLoading] = useState(true); // To show a loading state
+  const [selectedStatus, setSelectedStatus] = useState("Under Review"); // Default status
+
+  useEffect(() => {
+    const fetchApplicantData = async () => {
+      try {
+        const data = await getApplicantDetails(); // Fetch data from API
+        setApplicants(data); // Update state with fetched data
+        setLoading(false); // Stop loading
+      } catch (error) {
+        console.error("Error fetching applicants:", error);
+        setLoading(false); // Stop loading on error
+      }
+    };
+
+    fetchApplicantData();
+  }, []);
+
+  const updateAdminStatus = async (applicantId, newStatus) => {
+    try {
+      const reqBody = {
+        applicantId: applicantId,
+        adminApproveStatus: newStatus,
+      };
+      const response = await axios.put(
+        "https://a818-112-134-213-205.ngrok-free.app/applicant",
+        reqBody
+      ); // Update with your API endpoint
+      return response.data; // Handle the response as needed
+    } catch (error) {
+      console.error("Error updating status:", error);
+      // Handle the error here
+    }
+  };
 
   const handleOpenDialog = (user) => {
     setSelectedUser(user); // Set the selected user data
-    setOpenDialog(!openDialog); // Toggle dialog visibility
+    setSelectedStatus(user.adminApproveStatus); // Set the status for the selected user
+    setOpenDialog(true); // Open dialog
   };
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
-  const totalPages = Math.ceil(TABLE_ROWS.length / ROWS_PER_PAGE);
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  const handleSaveStatus = async () => {
+    if (selectedUser) {
+      try {
+        await updateAdminStatus(selectedUser.passNo, selectedStatus); // Update the status
+        // Update the local state to reflect changes
+        setApplicants((prevApplicants) =>
+          prevApplicants.map((applicant) =>
+            applicant.passNo === selectedUser.passNo
+              ? { ...applicant, adminApproveStatus: selectedStatus }
+              : applicant
+          )
+        );
+        setOpenDialog(false); // Close the dialog after saving
+      } catch (error) {
+        console.error("Error saving status:", error);
+        // Handle any error here
+      }
+    }
+  };
+
+  const totalPages = Math.ceil(applicants.length / ROWS_PER_PAGE);
   const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
   const endIndex = startIndex + ROWS_PER_PAGE;
-  const currentRows = TABLE_ROWS.slice(startIndex, endIndex);
+  const currentRows = applicants.slice(startIndex, endIndex);
 
   return (
     <>
-      <Card className="h-full w-full">
+      <NavbarType2 />
+      <Card className="h-full w-9/10 mt-20 mx-8">
         <CardHeader floated={false} shadow={false} className="rounded-none">
-          <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-            <div>
-              <Typography variant="h5" color="blue-gray">
-                Recent Transactions
-              </Typography>
-              <Typography color="gray" className="mt-1 font-normal">
-                These are details about the last transactions
-              </Typography>
-            </div>
-            <div className="flex w-full shrink-0 gap-2 md:w-max">
-              <div className="w-full md:w-72">
-                <Input
-                  label="Search"
-                  icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                />
-              </div>
-              <Button className="flex items-center gap-3" size="sm">
-                <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" />{" "}
-                Download
-              </Button>
-            </div>
+          <div className="mb-4 flex flex-col justify-center items-center gap-8 md:flex-row md:items-center">
+            <span className="font-bold text-[30px]">Admin panel</span>
           </div>
         </CardHeader>
 
@@ -291,13 +153,13 @@ const AdminDashboard = () => {
               {currentRows.map(
                 (
                   {
-                    img,
-                    passportNumber,
+                    passImage,
+                    passNo,
                     name,
-                    country,
+                    passCountry,
                     visaType,
-                    visaStatus,
-                    interpolClearance,
+                    adminApproveStatus,
+                    interPolCheck,
                   },
                   index
                 ) => {
@@ -307,11 +169,12 @@ const AdminDashboard = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={name}>
+                    // Use passNo as the unique key since it represents a unique passport number
+                    <tr key={passNo}>
                       <td className={classes}>
                         <div className="flex items-center gap-3">
                           <Avatar
-                            src={img}
+                            src={passImage}
                             alt={name}
                             size="md"
                             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
@@ -324,7 +187,7 @@ const AdminDashboard = () => {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {passportNumber}
+                          {passNo}
                         </Typography>
                       </td>
                       <td className={classes}>
@@ -342,7 +205,7 @@ const AdminDashboard = () => {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {country}
+                          {passCountry}
                         </Typography>
                       </td>
                       <td className={classes}>
@@ -359,11 +222,11 @@ const AdminDashboard = () => {
                           <Chip
                             size="sm"
                             variant="ghost"
-                            value={visaStatus}
+                            value={adminApproveStatus}
                             color={
-                              visaStatus === "Approved"
+                              adminApproveStatus === "Approved"
                                 ? "green"
-                                : visaStatus === "Pending"
+                                : adminApproveStatus === "Pending"
                                 ? "amber"
                                 : "red"
                             }
@@ -375,11 +238,11 @@ const AdminDashboard = () => {
                           <Chip
                             size="sm"
                             variant="ghost"
-                            value={interpolClearance}
+                            value={interPolCheck}
                             color={
-                              interpolClearance === "Cleared"
+                              interPolCheck === "Cleared"
                                 ? "green"
-                                : interpolClearance === "Under Review"
+                                : interPolCheck === "Under Review"
                                 ? "amber"
                                 : "red"
                             }
@@ -391,15 +254,17 @@ const AdminDashboard = () => {
                           size="sm"
                           variant="text"
                           className="text-blue-500"
-                          onClick={() => handleOpenDialog({
-                            img,
-                            passportNumber,
-                            name,
-                            country,
-                            visaType,
-                            visaStatus,
-                            interpolClearance
-                          })}
+                          onClick={() =>
+                            handleOpenDialog({
+                              passImage,
+                              passNo,
+                              name,
+                              passCountry,
+                              visaType,
+                              adminApproveStatus,
+                              interPolCheck,
+                            })
+                          }
                         >
                           View More
                         </Button>
@@ -444,33 +309,78 @@ const AdminDashboard = () => {
       </Card>
 
       {/* Dialog for displaying user details */}
-      <Dialog open={openDialog} handler={() => setOpenDialog(!openDialog)}>
+      <Dialog open={openDialog} handler={() => setOpenDialog(false)}>
         <DialogHeader>Details for {selectedUser?.name}</DialogHeader>
-        <DialogBody className="overflow-scroll">
-          {selectedUser && (
+        <DialogBody divider>
+          <div className="flex flex-col gap-4">
             <div>
-              <Typography variant="h6">Passport Number:</Typography>
-              <Typography>{selectedUser.passportNumber}</Typography>
-
-              <Typography variant="h6">Country:</Typography>
-              <Typography>{selectedUser.country}</Typography>
-
-              <Typography variant="h6">Visa Type:</Typography>
-              <Typography>{selectedUser.visaType}</Typography>
-
-              <Typography variant="h6">Visa Status:</Typography>
-              <Typography>{selectedUser.visaStatus}</Typography>
-
-              <Typography variant="h6">Interpol Clearance:</Typography>
-              <Typography>{selectedUser.interpolClearance}</Typography>
-
-              <img src={selectedUser.img} alt={selectedUser.name} className="w-32 h-32 rounded-full mt-4" />
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Passport Number: {selectedUser?.passNo}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Name: {selectedUser?.name}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Country: {selectedUser?.passCountry}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Visa Type: {selectedUser?.visaType}
+              </Typography>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal"
+              >
+                Interpol Clearance: {selectedUser?.interPolCheck}
+              </Typography>
             </div>
-          )}
+            <div>
+              <label
+                htmlFor="status"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Update Status
+              </label>
+              <select
+                id="status"
+                name="status"
+                value={selectedStatus}
+                onChange={handleStatusChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value="Under Review">Under Review</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
         </DialogBody>
         <DialogFooter>
-          <Button variant="text" color="red" onClick={() => setOpenDialog(false)}>
-            Close
+          <Button
+            variant="text"
+            color="blue-gray"
+            onClick={() => setOpenDialog(false)}
+          >
+            Cancel
+          </Button>
+          <Button variant="gradient" color="green" onClick={handleSaveStatus}>
+            Save
           </Button>
         </DialogFooter>
       </Dialog>

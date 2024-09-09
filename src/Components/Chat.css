@@ -1,0 +1,29 @@
+.react-chatbot-kit-chat-container {
+    width: 100%;
+    height: 100%;
+}
+
+.react-chatbot-kit-chat-inner-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+}
+
+.react-chatbot-kit-chat-message-container {
+    flex-grow: 1; /* Allows the message container to grow as needed */
+    overflow-y: auto; /* Adds vertical scrolling */
+    max-height: calc(100% - 100px); /* Restrict height and allow scrolling */
+}
+
+.react-chatbot-kit-chat-input-container {
+    width: 100%;
+    height: auto;
+}
+
+.react-chatbot-kit-chat-header {
+    background: #263E7D;
+    color:white;
+
+}
