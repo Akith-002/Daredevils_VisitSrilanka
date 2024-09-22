@@ -25,7 +25,7 @@ To get started with this project, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/daredevils-visitsrilanka.git
+   git clone https://github.com/Akith-002/Daredevils_VisitSrilanka.git
    ```
 2. Navigate to the project directory:
    ```bash
